@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./imgViewerCSS.css">
+    <script src="./imgViewerJS.js"></script>
+    <script type="text/javascript" language="javascript">
+        window.addEventListener("resize", init);
+        window.addEventListener("onload", init);
+        document.addEventListener("DOMContentLoaded", init, false);
+    </script>
+</head>
+<body>
+<div id="imgDiv" class="imgDiv">
+    <img src='./img/0.jpg' id='Image0' class='mainImage' style='display: inherit'>
+
+</div>
+
+<div class="buttonDiv" id="buttonDiv">
+    <!-- <img src="./icon/start.svg" class="button" onclick="changeImg(-5)"> -->
+    <img src="./icon/pre.svg" class="button" onclick="changeImg(-1)">
+    <img src="./icon/play.svg" class="button" id="playButton" onclick="playPause()">
+    <img src="./icon/next.svg" class="button" onclick="changeImg(1)">
+    <img src="./icon/fullscreen.svg" class="button" onclick="fullScreen()">
+</div>
+
+
+</body>
+</html>

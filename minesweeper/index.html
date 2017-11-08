@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./css/mine.css">
+    <script src="./js/mine.js"></script>
+    <link rel="icon" href="http://kokab.no/icon/main.png">
+</head>
+<body>
+<div class="headDiv">
+<p class="text"> To play choose width, height and number of mine you wish to have, good luck!</p>
+<input id="X" class="input"
+       autocomplete="off"
+       placeholder="width"
+       type="number"
+/>
+<input id="Y" class="input"
+       autocomplete="off"
+       placeholder="height"
+       type="number"
+/>
+<input id="mine" class="input"
+       autocomplete="off"
+       placeholder="mines"
+       type="number"
+/>
+
+<button onclick="init()" id="button" class="button"> Start </button>
+</div>
+<br/><br/>
+<p class="warning" id="p1"> X and Y should be between 5 and 25, </p>
+<p class="warning" id="p2"> number of mines should be between 5 and (x*y)/2 </p>
+<div class="mainDiv">
+    <div class="endmsgDiv" id="endmsgDiv">
+        <p class="endmsg" id="endmsg"></p>
+    </div >
+    <table id="table">
+    </table>
+</div>
+</body>
+</html>

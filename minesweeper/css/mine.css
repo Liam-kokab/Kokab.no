@@ -1,0 +1,67 @@
+.cells{
+    margin-right: 3px;
+    box-shadow: 3px 3px 10px #515151;
+}
+.cells:hover{
+    transform: scale(1.2);
+    box-shadow: 6px 6px 15px #3e3e3e;
+}
+.cellsT{
+    margin-right: 3px;
+    box-shadow: 3px 3px 10px #515151;
+}
+.input{
+    width: 80px;
+    height: 12px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 3px solid #DDD;
+    box-shadow: inset 0 2px 5px rgba(29, 29, 29, 0.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+    padding: 6px;
+    margin-right: 25px;
+}
+.input:hover{
+    transform: scale(1.1);
+    box-shadow: inset 0 4px 8px rgba(0,0,0,.39);
+}
+.button{
+    height: 24px;
+    width: 70px;
+}
+.warning{
+    font-size: 24px;
+    display: none;
+
+}
+.endmsgDiv{
+    display: none;
+    height: 190px;
+    position: absolute;
+    z-index: 200;
+    background-color: black;
+    opacity: 0.85;
+    text-align: center;
+}
+.endmsg{
+    opacity: 1;
+    font-size: 60px;
+    color: white;
+}
+
+.text{
+    font-size: 17px;
+}
+.headDiv{
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 88px;
+    width: 110%;
+    margin-top: 12px;
+    text-align: center;
+}
+.mainDiv{
+    padding-top: 88px;
+}
