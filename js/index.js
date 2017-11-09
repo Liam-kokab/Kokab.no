@@ -6,7 +6,7 @@ var SpaceFighter = false;
 function frameChange (pageName){
     var frame = document.getElementById('mainFrame');
     SpaceFighter = pageName == 'SpaceFighter';
-    spacialView();
+    //spacialView();
     if(change == 1){
         document.getElementById('buttonDiv').style.display = "none";
         document.getElementById('menuButton').className = "icon-menu";
@@ -19,7 +19,7 @@ function frameChange (pageName){
         frame.contentWindow.document.location.href = './pages/' + pageName + '.html';
     }
 }
-
+/*
 function spacialView() {
     if(SpaceFighter){
         document.getElementById('body').style.backgroundColor = 'black';
@@ -29,19 +29,21 @@ function spacialView() {
         document.getElementById('over').className = 'over';
     }
     WebBuilder();
-}
+}*/
 
 function showMenu() {
     var menuButton  = document.getElementById('menuButton');
     var buttonDiv = document.getElementById('buttonDiv');
-
-    if(menuButton.className.indexOf('menu') != -1){
-        menuButton.className = 'icon-cancel';
+    var menuIsShowing = (buttonDiv.style.display != 'inherit');
+    console.log(" - " + menuIsShowing);
+    if(menuIsShowing){
+        menuButton.innerHTML = '<i class="fa">&#xf00d;</i>';
         buttonDiv.style.display = 'inherit';
     }else{
-        menuButton.className = 'icon-menu';
+        menuButton.innerHTML = '<i class="fa">&#xf0c9;</i>';
         buttonDiv.style.display = 'none';
     }
+    menuIsShowing = !menuIsShowing;
 }
 
 function getWidth() {
@@ -54,7 +56,7 @@ function getHeight() {
         || document.documentElement.clientHeight
         || document.body.clientHeight;
 }
-
+/*
 function WebBuilder() {
     var frame = document.getElementById('mainFrame');
     var buttonDiv = document.getElementById('buttonDiv');
@@ -107,3 +109,4 @@ function WebBuilder() {
         document.getElementById('bottomimg').style.display = "inherit";
     }
 }
+*/

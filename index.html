@@ -6,30 +6,33 @@
     <meta name="author" content="Liam Kokab">
     <link rel="icon" href="http://kokab.no/icon/main.png">
     <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./js/index.js"></script>
 
     <script>
-        window.addEventListener("resize", WebBuilder);
+       /* window.addEventListener("resize", WebBuilder);
         window.addEventListener("onload", WebBuilder);
-        document.addEventListener("DOMContentLoaded", WebBuilder, false);
+        document.addEventListener("DOMContentLoaded", WebBuilder, false);*/
     </script>
 
 </head>
 <body  scroll="no" style="overflow: hidden" id="body">
 <div class="headDiv" id="headDiv">
-
-    <i class="icon-menu" id="menuButton" onclick="showMenu()"></i>
-
-    <!-- <img src="./icon/menu.svg"/> -->
+    <div class="filler"></div>
+    <button class="menuButton" id="menuButton" onclick="showMenu()">
+        <i class="fa">&#xf0c9;</i>
+    </button>
+    
+    
     <p class="over" id="over">Liam Kokab</p>
 </div>
 <div class="mainDiv">
     <div class="buttonDiv" id="buttonDiv">
 
-        <p class="button" onclick="frameChange('main')"> Home </p>
-        <p class="button" onclick="frameChange('cv')"> CV </p>
-        <p class="button" onclick="frameChange('minesweeper')"> Minesweeper </p>
-        <p class="button" onclick="frameChange('SpaceFighter')"> SpaceFighter </p>
+        <button class="button" onclick="frameChange('main')"> Home </button>
+        <button class="button" onclick="frameChange('cv')"> CV </button>
+        <button class="button" onclick="frameChange('minesweeper')"> Minesweeper </button>
+        <button class="button" onclick="frameChange('SpaceFighter')"> SpaceFighter </button>
 
         <div class="bottominfo" id="bottominfo">
             <pre class="pre">Mobil. +47 93018799
@@ -39,7 +42,7 @@ E-mail. <a href="mailto:Liam@Kokab.no">Liam@Kokab.no</a></pre>
         </div>
 
     </div>
-       <iframe id="mainFrame" class="mainFrameFull" src="./pages/main.html"/>
+       <iframe id="mainFrame" class="mainFrame" src="./pages/main.html"/>
 
 
 </div>
