@@ -59,8 +59,10 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 88px;
     width: 110%;
-    margin-top: 12px;
-    text-align: center;
+    padding-left: 20%;
+    margin-left: 5px;
+    text-align: left;
+
 }
 .mainDiv{
     padding-top: 88px;

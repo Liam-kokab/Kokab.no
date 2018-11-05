@@ -78,6 +78,7 @@
     text-align: center;
     padding: 0 2% 0px 2%;
     width: 190px;
+    min-height: 300px;
     height: calc(100% - 97px);
     position: absolute;
     left: 1%;
@@ -203,7 +204,7 @@ html, body {
         width: 98%;
     }
 }
-@media(max-height : 520px){
+@media(max-height : 640px){
     .bottomimg{
          display: none;
     }
