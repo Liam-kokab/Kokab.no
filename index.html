@@ -10,42 +10,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./js/index.js"></script>
 
-    <script>
-       /* window.addEventListener("resize", WebBuilder);
-        window.addEventListener("onload", WebBuilder);
-        document.addEventListener("DOMContentLoaded", WebBuilder, false);*/
-    </script>
-
 </head>
+
 <body  scroll="no" style="overflow: hidden" id="body">
 <div class="headDiv" id="headDiv">
     <div class="filler"></div>
     <button class="menuButton" id="menuButton" onclick="showMenu()">
         <i class="fa">&#xf0c9;</i>
     </button>
-    
-    
-    <p class="over" id="over">Liam Kokab</p>
+
+
+    <h2 class="over" id="over">Liam Kokab</h2>
 </div>
-<div class="mainDiv">
+<div class="mainDiv" id="mainDiv">
     <div class="buttonDiv" id="buttonDiv">
 
         <button class="button" onclick="frameChange('main')"> Home </button>
         <button class="button" onclick="frameChange('cv')"> CV </button>
         <button class="button" onclick="frameChange('minesweeper')"> Minesweeper </button>
-        <button class="button" onclick="frameChange('SpaceFighter')"> SpaceFighter </button>
+        <button class="button" onclick="frameChange('SpaceFighter')"> Space Fighter </button>
+        <h2 class="over" style="padding-bottom: 0; margin-bottom: 0">Extarn Links</h2>
+        <button class="button" onclick="location.href='http://soliasboligstyling.no/'" > SoliasBoligstyling </button>
+        <button class="button" onclick="location.href='https://github.com/Liam-kokab'"> GitHub </button>
 
-        <div class="bottominfo" id="bottominfo">
+
+
+
+        <div class="bottomInfo" id="bottominfo">
             <pre class="pre">Mobil. +47 93018799
 E-mail. <a href="mailto:Liam@Kokab.no">Liam@Kokab.no</a></pre>
-            <img id="bottomimg" class="bottomimg" src="./img/Liam.JPG" />
-
+            <img id="bottomimg" class="bottomImg" src="./img/Liam.JPG" />
         </div>
-
     </div>
-       <iframe id="mainFrame" class="mainFrame" src="./pages/main.html"/>
+    <div id="sideButtonPlace" style="width: 100%; height: 100%"></div>
 
 
+    <iframe id="mainFrame" class="mainFrame" src="./pages/main.html"/>
 </div>
 
 

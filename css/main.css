@@ -1,0 +1,54 @@
+.mainGridDiv{
+    width: 80%;
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2%;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    -ms-grid-column-span: 2;
+    -ms-grid-columns: 48% 48%;
+    -ms-grid-gap: 15px;
+}
+.mainGridElem{
+    width: auto;
+    max-width: 90%;
+    padding: 0;
+    margin: 0;
+    opacity: 0.6;
+    box-shadow: 5px 5px 30px #919191;
+    position: relative;
+
+}
+.mainGridElem:hover{
+    opacity: 1;
+}
+.backgroundDiv{
+    height: 98%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    overflow: hidden;
+   
+    
+}
+.mainBackground{
+    overflow: hidden;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    opacity: .5;
+    -webkit-animation: imageMove 5s infinite; /* Safari 4.0 - 8.0 */
+    animation: imageMove 5s infinite;
+}
+/* Safari 4.0 - 8.0 
+@-webkit-keyframes imageMove {
+    from {left: 0px;}
+    to {left: -1000px;}
+}*/
+
+@keyframes imageMove {
+    from {left: 0px;}
+    to {left: -100vw;}
+}

@@ -1,28 +1,23 @@
-.para{
+html,
+body {
+    width: 100%;
+    min-width: 500px;
+    height: 100%;
+    margin: 0;
+}
+
+.para {
     font-size: 18px;
     margin: 0;
     padding: 0;
-
 }
-.main{
+
+.main {
     margin-top: 10px;
     margin-left: 0px;
 }
 
-.input{
-    width: 397px;
-    height: 27px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    border-top: none;
-    border-bottom: 3px solid #DDD;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
-    padding: 6px;
-}
-.input::-ms-clear {
-    display: none;
-}
-.headDiv{
+.headDiv {
     background-color: white;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -30,107 +25,109 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
     position: absolute;
     height: 88px;
-    width: calc(4% + 190px);
+    width: calc(4% + 210px);
     left: 1%;
     top: 0px;
     text-align: center;
-
     box-shadow: 4px 4px 10px 2px #7e7e7e;
     z-index: 300;
 }
 
-.button{
+.button {
     text-align: center;
-    width: 190px;
+    width: 210px;
     border: none;
     height: 42px;
     margin-top: 18px;
-    transition: all .2s ease-in-out;
     box-shadow: -3px 5px 10px #515151;
     background-color: #1a3256;
     color: #FFFFFF;
     font-size: 25px;
-    transition: all .2s ease-in-out;
+    transition: all .15s ease-in-out;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-.button:hover{
+
+.button:hover {
     transform: scale(1.05);
     box-shadow: -6px 6px 10px #515151;
     cursor: pointer;
 }
 
-.menu{
+.menu {
     width: 150px;
     margin-top: 5px;
     transition: all .2s ease-in-out;
     box-shadow: -6px 8px 13px #484848;
-
 }
-.menu:hover, .menuButton:hover{
+
+.menu:hover,
+.menuButton:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px #515151;
 }
 
+
 .buttonDiv {
-    display: inherit;
     text-align: center;
     padding: 0 2% 0px 2%;
-    width: 190px;
+    width: 210px;
     min-height: 300px;
     height: calc(100% - 97px);
     position: absolute;
     left: 1%;
     margin-left: 0;
     top: 97px;
-
     background-color: rgba(255, 255, 255, 0.65);
-
-    
     box-shadow: 4px 4px 10px 2px #7e7e7e;
     z-index: 200;
 }
-.bottominfo{
+
+.bottomInfo {
     position: absolute;
     padding: 0 0 0.5%;
     bottom: 0px;
     height: auto;
     text-align: left;
 }
-.bottomimg{
+
+.bottomImg {
     width: 190px;
     display: inherit;
 }
-.mainDiv{
+
+.mainDiv {
     width: 100%;
     height: 100%;
     display: inline-block;
 }
 
-.mainFrame{
+.mainFrame {
+    top:0px;
+    display: inline;
     position: absolute;
     border: none;
-    width: 100%;
+    margin: 0;
+    width: calc(100% - (210px + 5%));
     height: 100%;
-    left: calc(5% + 195px);
-    
+    left: calc(5% + 210px);
 }
 
-html, body {
-    width: 100%;
-    min-width: 500px;
-    height: 100%;
-    margin: 0;
-}
-.over{
+.over {
+    font-weight: normal;
     top: 0px;
     margin-top: 0;
     font-size: 28px;
     padding: 25px calc(3% + 13px);
     text-shadow: -3px 4px 7px #515151;
 }
-.over-black{
+
+.over-black {
     align-self: center;
     top: 0px;
     margin-top: 0;
@@ -139,18 +136,14 @@ html, body {
     padding: 25px 35px;
     text-shadow: -3px 4px 7px #aeaeae;
 }
-.word{
-    position: absolute;
-    top: 30px;
-    width: 100%;
-    font-size: 30px;
-}
-.headText{
+
+.headText {
     margin-bottom: 0.1in;
     line-height: 120%;
     font-family: "Tahoma", monospace;
     font-size: 30px;
 }
+
 .pre {
     font-family: "Tahoma", monospace;
     font-size: 15px;
@@ -159,7 +152,7 @@ html, body {
     padding-left: 1px;
 }
 
-.menuButton{
+.menuButton {
     color: #FFFFFF;
     font-size: 45px;
     background-color: #1a3256;
@@ -173,7 +166,7 @@ html, body {
     display: none;
 }
 
-.filler{
+.filler {
     background-color: white;
     position: absolute;
     top: -10px;
@@ -183,29 +176,69 @@ html, body {
     z-index: 250;
 }
 
-@media(orientation: portrait){
-    .menuButton{
+.sideButtonDiv {
+    padding-left: 200px;
+    display: none;
+    text-align: right;
+    width: calc(3% + 380px);
+    max-width: 540px;
+    height: auto;
+    background-color: rgba(255, 39, 0, 0.65);
+    position: absolute;
+    z-index: 195;
+    animation: sideMove .3s forwards ease-out;
+}
+
+@keyframes sideMove {
+    0% {
+        left: 4%;
+        z-index: 0;
+    }
+    100% {
+        left: 3%;
+        z-index: 210;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .menuButton {
         display: inherit;
     }
-    .buttonDiv{
+    .buttonDiv {
         display: none;
         top: calc(111px - 100%);
         animation: mymove .6s forwards ease-out;
     }
     @keyframes mymove {
-        0%   {top: calc(111px - 100%);}
-        100% {top: 97px;}
+        0% {
+            top: calc(111px - 100%);
+            opacity: 0;
+        }
+        100% {
+            top: 97px;
+            opacity: 1;
+        }
     }
-    .mainFrame{
+    .mainFrame {
+        width: 99%;
         left: 0px;
         top: 88px;
     }
-    .headDiv{
+    .headDiv {
         width: 98%;
     }
+
+    
 }
-@media(max-height : 640px){
-    .bottomimg{
-         display: none;
+
+@media screen and (orientation: landscape) {
+    .buttonDiv {
+        display: inherit !important;
     }
- }
+}
+
+@media screen and (max-height: 830px) {
+    .bottomImg {
+        display: none;
+    }
+}
