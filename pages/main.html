@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../css/index.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-  
+    <script src="../js/main.js"></script>
+
 </head>
-<body class="b">
-   <div class="backgroundDiv">
-   <img src=".././img/SpaceFighter1.png" class="mainBackground">
-</div>
+<body id="body" style="background-color: black">
+    <div class="backgroundDiv" id="backgroundDiv" onmouseover="removeBackground()">
+            <img src='.././img/SpaceFighter1.png' class='backgroundImg' id='backgroundImg' style="top: -500px;">
+        
+    </div>
     
 
     <div style="margin: 0; padding: 0; width: 100%; text-align: center">
         <div class="mainGridDiv">
-                <img class="mainGridElem" src="../img/testImage.png">
-                <img class="mainGridElem" src="../img/testImage.png">
+                <img class="mainGridElem" src="../img/testImage.png" onclick="mouseOver(1)">
+                <img class="mainGridElem" src="../img/testImage.png" id="mainGridElem2">
                 <img class="mainGridElem" src="../img/testImage.png">
                 <img class="mainGridElem" src="../img/testImage.png">
                 <img class="mainGridElem" src="../img/testImage.png">
