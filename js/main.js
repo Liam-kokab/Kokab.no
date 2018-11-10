@@ -80,9 +80,9 @@ function playBackgroundAnimation(){
         let image = document.getElementById(
             backgroundImageIds[random(0,backgroundImageIds.length,true)]);
         backBackgrounAnimation(
-            random(20,50,true),
+            random(5,30,true),
             image,
-            random(-0.01, 0.01, false)
+            random(3, 3, true)/100
         );
         imageAnimationPlayingNow++;
     
@@ -94,15 +94,22 @@ function playBackgroundAnimation(){
 /**
  * 
  * @param {int} itrastion 
- * @param {*} imageOpacity 
+ * @param {*} image 
  * @param {*} opacityChange 
  */
 function backBackgrounAnimation(itrastion, image, opacityChange){
     if(stopAnimations || stopBackgroundAnimation) return;
     setTimeout(function() {
         if(stopAnimations || stopBackgroundAnimation) return;
+
+        
+        let imageOpacity = window.getComputedStyle(image).getPropertyValue("opacity");
+        if(imageOpacity < 0.3 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
+        else if(imageOpacity > 0.75 && opacityChange > 0) opacityChange = -opacityChange;
         //console.log("image.style.opacity: " + window.getComputedStyle(image).getPropertyValue("opacity") + "\n opacityChange: " + opacityChange);
-        image.style.opacity = opacityChange + window.getComputedStyle(image).getPropertyValue("opacity");
+        console.log("opacaty: " + imageOpacity + "\nchange: " + opacityChange);
+        
+        image.style.opacity = opacityChange + imageOpacity;
         if(itrastion > 1) backBackgrounAnimation(itrastion - 1, image, opacityChange);
         else{
             imageAnimationPlayingNow--;
