@@ -28,8 +28,9 @@ body {
     opacity: 0.7;
     box-shadow: 5px 5px 30px #919191;
     position: relative;
-
 }
+
+
 
 .backgroundDiv{
     height: 120%;
@@ -37,7 +38,7 @@ body {
     position: fixed;
     top: -5%;
     left:-5%;
-    
+    opacity: .5;
    
     
 }
@@ -46,5 +47,5 @@ body {
     z-index: -1;
     position: absolute;
     width: 42%;
-    opacity: .5;
+    
 }
