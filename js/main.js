@@ -18,8 +18,6 @@ function mouseOver(num){
     var html = "";
     var divElem = document.getElementById("backgroundDiv");
 
-    console.log(imageHeight);
-
     do{
         //console.log("ImageCount " + imageCount);
         for (var i = 0; i < 3; i++) {
@@ -46,6 +44,8 @@ function mouseleave(){
 
     
 }
+
+//no one is calling this! TODO: remove
 var count = 0;
 function init(){
     console.log("resize and load: " + count++);
