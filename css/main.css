@@ -38,7 +38,7 @@ body {
     position: fixed;
     top: -5%;
     left:-5%;
-    opacity: .5;
+    opacity: 1;
    
     
 }
@@ -47,5 +47,6 @@ body {
     z-index: -1;
     position: absolute;
     width: 42%;
+    opacity: 0.5;
     
 }
