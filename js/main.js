@@ -1,8 +1,14 @@
 var imageCount = -1;
 function mouseOver(num){
     
-    //opcity for others
-    document.getElementById("mainGridElem2").style.opacity = 0.3;
+    
+    //ajusting opacity
+    for (var j = 1; j < 7; j++) {
+        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.3;
+         else  document.getElementById("mainGridElem" + j).style.opacity = 1;
+    }
+
+    
 
     var inneHeight = document.getElementById('body').clientHeight;
     //var minusTop = -Math.floor(inneHeight/20); 
@@ -17,7 +23,7 @@ function mouseOver(num){
     do{
         //console.log("ImageCount " + imageCount);
         for (var i = 0; i < 3; i++) {
-            var id = "backgroundImg" + ++imageCount;
+            var id = "backgroundImg" + (++imageCount);
             html = "<img src='.././img/SpaceFighter1.png' class='backgroundImg' id='" + id + "'>";
 
             divElem.innerHTML += html;
@@ -31,6 +37,20 @@ function mouseOver(num){
     }while(inneHeight > ((imageCount/3) * imageHeight) - 10);
 }
 
-function removeBackground(){
-   // document.getElementById("backgroundDiv").innerHTML = "";
+function mouseleave(){
+    // setting opacity to normal
+    for (var j = 1; j < 7; j++) document.getElementById("mainGridElem" + j).style.opacity = 0.7;
+
+    //removing background
+    document.getElementById("backgroundDiv").innerHTML = "";
+
+    
 }
+var count = 0;
+function init(){
+    console.log("resize and load: " + count++);
+}
+
+//window.addEventListener("onload", init());
+//document.addEventListener("DOMContentLoaded", init(), false);
+//window.addEventListener("resize", init());

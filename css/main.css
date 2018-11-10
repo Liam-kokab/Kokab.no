@@ -4,6 +4,7 @@ body {
     min-width: 500px;
     height: 100%;
     margin: 0;
+    overflow: hidden;
 }
 .mainGridDiv{
     width: 80%;
@@ -21,6 +22,7 @@ body {
 .mainGridElem{
     width: auto;
     max-width: 90%;
+    max-height: 30vh;
     padding: 0;
     margin: 0;
     opacity: 0.7;
@@ -28,16 +30,14 @@ body {
     position: relative;
 
 }
-.mainGridElem:hover{
-    opacity: 1;
-}
+
 .backgroundDiv{
     height: 120%;
     width: 120%;
     position: fixed;
     top: -5%;
     left:-5%;
-    overflow: hidden;
+    
    
     
 }
