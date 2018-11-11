@@ -2,12 +2,13 @@
 var stopLeaveAnimations = false;
 var stopBackgroundAnimation = false;
 var leaveAnimationInProgress = false;
-var waitingToPerformMouseOver = false;
+var MouseOverInProgress = false;
 
 // number of background animation being played 
 var imageAnimationPlayingNow = 0;
 var maxImageAnimationPlayingNow = 15;
 
+//list of background image ids
 var backgroundImageIds = [];
 
 /**
@@ -17,7 +18,7 @@ var backgroundImageIds = [];
  */
 function controller(num, action){
     if(action === "over"){
-        waitingToPerformMouseOver = true;
+        MouseOverInProgress = true;
         stopLeaveAnimations = true;
         stopBackgroundAnimation = true;
         if(leaveAnimationInProgress || imageAnimationPlayingNow > 0){
@@ -28,10 +29,11 @@ function controller(num, action){
         }
         //performers mouse over actions 
         mouseOver(num);
-        waitingToPerformMouseOver = false;
+        MouseOverInProgress = false;
     }
     else if(action === "leave"){
-        if(waitingToPerformMouseOver) return;
+        if(MouseOverInProgress) return;
+
         stopBackgroundAnimation = true;
         if(imageAnimationPlayingNow > 0){
             setTimeout(function() {
@@ -48,19 +50,51 @@ function controller(num, action){
     }
 }
 
+
+//TODO : finish this
 /**
- * 
+ * @param {Number} num 
+ * @returns image info
+ */
+function getImageInfo (num){
+    /**
+     * Image group object 
+     * @param {Number} num 
+     * @param {string[]} names file names 
+     * @param {Number} count 
+     * @param {String} sampleImageId 
+     */
+    function image(num, names, count, sampleImageId){
+        this.folder = "../img/" + num + "/";
+        this.names = names; 
+        this.numberOfImages = count;
+        this.sampleImageId = sampleImageId;
+        height = document.getElementById(this.sampleImageId).clientHeight;  
+    }
+
+    switch(num){ 
+        case 1: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
+        case 2: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
+        case 3: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
+        case 4: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
+        case 5: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
+        case 6: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
+    }
+
+}
+
+/**
+ * performers mouse over
  * @param {int} num image number that call this.
  */
 function mouseOver(num){
     
-    //adjusting opacity
+    //adjusting opacity of icons
     for (var j = 1; j < 7; j++) {
         if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.3;
          else  document.getElementById("mainGridElem" + j).style.opacity = 1;
     }
 
-    
     var imageCount = -1;
     var innerHeight = document.getElementById('body').clientHeight;
     var imageHeight = document.getElementById("backgroundImg").clientHeight;
@@ -183,9 +217,3 @@ function mouseLeaves(countUp, num){
 function random(from, to){
     return Math.floor(((to - from) * Math.random()) + from);
 }
-
-/**
-    setTimeout(function() {
-        
-    }, 10);
- */
