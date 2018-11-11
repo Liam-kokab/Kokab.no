@@ -69,16 +69,17 @@ function getImageInfo (num){
         this.names = names; 
         this.numberOfImages = count;
         this.sampleImageId = sampleImageId;
-        height = document.getElementById(this.sampleImageId).clientHeight;  
+        //height = document.getElementById(this.sampleImageId).clientHeight;  
+        height = 5;
     }
 
     switch(num){ 
-        case 1: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
-        case 2: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
-        case 3: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
-        case 4: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
-        case 5: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
-        case 6: return new image(num, ["1.png", "2.png"], 2, "homeImageId");
+        case 1: return new image(num, ["testImage.png"]                         , 1, "sampleImageId1");
+        case 2: return new image(num, ["CV.png"]                                , 1, "sampleImageId2");
+        case 3: return new image(num, ["minesweeper1.png", "minesweeper2.png"]  , 2, "sampleImageId3");
+        case 4: return new image(num, ["sf1.png", "sf2.png", "sf3.png"]         , 3, "sampleImageId4");
+        case 5: return new image(num, ["Solias1.png", "Solias2.png"]            , 2, "sampleImageId5");
+        case 6: return new image(num, ["GitHub.svg"]                            , 1, "sampleImageId6");
     }
 
 }
@@ -97,7 +98,11 @@ function mouseOver(num){
 
     var imageCount = -1;
     var innerHeight = document.getElementById('body').clientHeight;
-    var imageHeight = document.getElementById("backgroundImg").clientHeight;
+    document.getElementById('body').style.backgroundColor = 'rgb(' + [100,100,100].join(',') + ')';
+
+    //getting info for image 
+    var images = getImageInfo(num);
+    var imageHeight = document.getElementById(images.sampleImageId).clientHeight;
 
     var divElem = document.getElementById("backgroundDiv");
     divElem.style.opacity = 0.7;
@@ -109,7 +114,10 @@ function mouseOver(num){
     do{
         for (var i = 0; i < 3; i++) {
             var id = "backgroundImg" + (++imageCount);
-            divElem.innerHTML += "<img src='.././img/SpaceFighter1.png' class='backgroundImg' id='" + id + "'>";
+            divElem.innerHTML += "<img src='" + 
+                images.folder + images.names[random(0,images.names.length)] + 
+                "' class='backgroundImg' id='" + id + "'>";
+
             backgroundImageIds.push(id);
             //top position
             document.getElementById(id).style.top = ((Math.floor(imageCount/3) * imageHeight)) + "px";
@@ -123,7 +131,6 @@ function mouseOver(num){
     stopBackgroundAnimation = false;
     stopLeaveAnimations = false;
     playBackgroundAnimation();
-
 }
 
 /**
@@ -132,14 +139,14 @@ function mouseOver(num){
 function playBackgroundAnimation(){
     if(stopBackgroundAnimation) return;
     while(imageAnimationPlayingNow < maxImageAnimationPlayingNow){
+        imageAnimationPlayingNow++;
         let image = document.getElementById(
             backgroundImageIds[random(0,backgroundImageIds.length)]);
-        
-        imageAnimationPlayingNow++;
+        //start animation thread            
         backBackgroundAnimation(
             random(5, 30),
             image,
-            random(-3, 3)/100
+            random(-25, 25)/1000
         );     
     }    
 }
@@ -147,23 +154,24 @@ function playBackgroundAnimation(){
 /**
  * dancing image
  * @param {int} iteration 
- * @param {*} image 
- * @param {*} opacityChange 
+ * @param {Image} image 
+ * @param {Number} opacityChange 
  */
 function backBackgroundAnimation(iteration, image, opacityChange){
     if(stopBackgroundAnimation){
         imageAnimationPlayingNow--;
         return;
     }
-
     setTimeout(function() {
         if(stopBackgroundAnimation){ 
             imageAnimationPlayingNow--;
             return;
         }
-     
-        let imageOpacity = parseFloat(window.getComputedStyle(image).getPropertyValue("opacity"));
-
+        let imageOpacity;
+        try {
+            imageOpacity = parseFloat(window.getComputedStyle(image).getPropertyValue("opacity"));
+        }catch(error) { imageOpacity = 0.5; }
+        
         if(imageOpacity < 0.1 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
         else if(imageOpacity > 0.9 && opacityChange > 0) opacityChange = 0 - opacityChange;
         
@@ -174,7 +182,7 @@ function backBackgroundAnimation(iteration, image, opacityChange){
             imageAnimationPlayingNow--;
             playBackgroundAnimation();
         }
-    }, 25);
+    }, 30);
 }
 
 /**
@@ -183,18 +191,21 @@ function backBackgroundAnimation(iteration, image, opacityChange){
  */
 function mouseLeaves(countUp, num){
     if(stopLeaveAnimations){
+        document.getElementById("body").style.backgroundColor = "white";
         leaveAnimationInProgress = false;
         return;
     }
     setTimeout(function() {
         if(stopLeaveAnimations){
+            document.getElementById("body").style.backgroundColor = "white";
             leaveAnimationInProgress = false;
             return;
         }
         for (var j = 1; j < 7; j++){
             if(num != j) document.getElementById("mainGridElem" + j).style.opacity = countUp;
         }
-
+        let color = countUp * 350;
+        document.getElementById("body").style.backgroundColor = 'rgb(' + [color,color,color].join(',') + ')';
         document.getElementById("backgroundDiv").style.opacity = (1-countUp);
         //backgroundImageIds.forEach(function (element) {
         //   document.getElementById(element).style.opacity = (0.84-countUp);
@@ -202,18 +213,39 @@ function mouseLeaves(countUp, num){
 
         if(countUp < 0.7) mouseLeaves(countUp + 0.03, num);
         else {
-            leaveAnimationInProgress = false;
+            document.getElementById("body").style.backgroundColor = "white";
             document.getElementById("backgroundDiv").innerHTML = "";
+            leaveAnimationInProgress = false;
         }
     }, 30);
 }
 
 /**
  * get a random number
- * @param {number} from range
- * @param {number} to range, but not including
- * @returns {num} a random number
+ * @param {Number} from range
+ * @param {Number} to range, but not including
+ * @returns {Number} a random number
  */
 function random(from, to){
     return Math.floor(((to - from) * Math.random()) + from);
+}
+
+function loadImages(){
+    let body = document.getElementById("body");
+    for (let i = 1; i < 7; i++) {
+        let imageG = getImageInfo(i);
+
+        body.innerHTML += "<img src='" +
+                imageG.folder + imageG.names[0] +
+                "' class='backgroundImg' id='" +
+                imageG.sampleImageId +
+                "' style='top: -500px;'></img>";
+
+        for (let j = 1; j < imageG.names.length; j++) {
+            body.innerHTML += "<img src='" +
+                imageG.folder + imageG.names[j] +
+                "' class='backgroundImg'" +
+                "  style='top: -500px;'></img>";            
+        }        
+    }
 }
