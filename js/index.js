@@ -2,6 +2,10 @@
  * Created by Liam.k on 28.08-2017.
  */
 
+ /**
+  * changes iframe 
+  * @param {String} pageName 
+  */
 function frameChange(pageName) {
     removeNow = true;
     var frame = document.getElementById('mainFrame');

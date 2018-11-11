@@ -1,3 +1,7 @@
+/**
+ * Created by Liam.k on 12.11-2018.
+ */
+
 //animation sync controllers 
 var stopLeaveAnimations = false;
 var stopBackgroundAnimation = false;
@@ -6,7 +10,7 @@ var MouseOverInProgress = false;
 
 // number of background animation being played 
 var imageAnimationPlayingNow = 0;
-var maxImageAnimationPlayingNow = 15;
+var maxImageAnimationPlayingNow = 10;
 
 //list of background image ids
 var backgroundImageIds = [];
@@ -48,40 +52,6 @@ function controller(num, action){
         document.getElementById("mainGridElem" + num).style.opacity = 0.7;
         mouseLeaves(0.34, num);     
     }
-}
-
-
-//TODO : finish this
-/**
- * @param {Number} num 
- * @returns image info
- */
-function getImageInfo (num){
-    /**
-     * Image group object 
-     * @param {Number} num 
-     * @param {string[]} names file names 
-     * @param {Number} count 
-     * @param {String} sampleImageId 
-     */
-    function image(num, names, count, sampleImageId){
-        this.folder = "../img/" + num + "/";
-        this.names = names; 
-        this.numberOfImages = count;
-        this.sampleImageId = sampleImageId;
-        //height = document.getElementById(this.sampleImageId).clientHeight;  
-        height = 5;
-    }
-
-    switch(num){ 
-        case 1: return new image(num, ["testImage.png"]                         , 1, "sampleImageId1");
-        case 2: return new image(num, ["CV.png"]                                , 1, "sampleImageId2");
-        case 3: return new image(num, ["minesweeper1.png", "minesweeper2.png"]  , 2, "sampleImageId3");
-        case 4: return new image(num, ["sf1.png", "sf2.png", "sf3.png"]         , 3, "sampleImageId4");
-        case 5: return new image(num, ["Solias1.png", "Solias2.png"]            , 2, "sampleImageId5");
-        case 6: return new image(num, ["GitHub.svg"]                            , 1, "sampleImageId6");
-    }
-
 }
 
 /**
@@ -138,7 +108,9 @@ function mouseOver(num){
  */
 function playBackgroundAnimation(){
     if(stopBackgroundAnimation) return;
-    while(imageAnimationPlayingNow < maxImageAnimationPlayingNow){
+    while(imageAnimationPlayingNow < maxImageAnimationPlayingNow &&
+        imageAnimationPlayingNow <= backgroundImageIds.length){
+
         imageAnimationPlayingNow++;
         let image = document.getElementById(
             backgroundImageIds[random(0,backgroundImageIds.length)]);
@@ -230,6 +202,9 @@ function random(from, to){
     return Math.floor(((to - from) * Math.random()) + from);
 }
 
+/**
+ * pre-loads background images
+ */
 function loadImages(){
     let body = document.getElementById("body");
     for (let i = 1; i < 7; i++) {
@@ -247,5 +222,35 @@ function loadImages(){
                 "' class='backgroundImg'" +
                 "  style='top: -500px;'></img>";            
         }        
+    }
+}
+
+/**
+ * @param {Number} num 
+ * @returns image info
+ */
+function getImageInfo (num){
+    /**
+     * Image group object 
+     * @param {Number} num 
+     * @param {string[]} names file names 
+     * @param {Number} count 
+     * @param {String} sampleImageId 
+     */
+    function image(num, names, count, sampleImageId){
+        this.folder = "../img/" + num + "/";
+        this.names = names; 
+        this.numberOfImages = count;
+        this.sampleImageId = sampleImageId;
+        //height = document.getElementById(this.sampleImageId).clientHeight;  
+        height = 5;
+    }
+    switch(num){ 
+        case 1: return new image(num, ["testImage.png"]                         , 1, "sampleImageId1");
+        case 2: return new image(num, ["CV.png"]                                , 1, "sampleImageId2");
+        case 3: return new image(num, ["minesweeper1.png", "minesweeper2.png"]  , 2, "sampleImageId3");
+        case 4: return new image(num, ["sf1.png", "sf2.png", "sf3.png"]         , 3, "sampleImageId4");
+        case 5: return new image(num, ["Solias1.png", "Solias2.png"]            , 2, "sampleImageId5");
+        case 6: return new image(num, ["GitHub.svg"]                            , 1, "sampleImageId6");
     }
 }
