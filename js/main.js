@@ -76,16 +76,20 @@ function mouseOver(num){
 var imageAnimationPlayingNow = 0;
 function playBackgroundAnimation(){
     if(stopAnimations || stopBackgroundAnimation) return;
-    while(imageAnimationPlayingNow < 10){
+    while(imageAnimationPlayingNow < 15){
         let image = document.getElementById(
             backgroundImageIds[random(0,backgroundImageIds.length,true)]);
+            //backgroundImageIds[1]);
+        
         backBackgrounAnimation(
             random(5,30,true),
             image,
-            random(3, 3, true)/100
+            random(-3, 3, true)/100
         );
         imageAnimationPlayingNow++;
-    
+
+        //console.log(random(-3, 3, true)/100);
+        //imageAnimationPlayingNow++;        
     }    
 
 }
@@ -101,15 +105,17 @@ function backBackgrounAnimation(itrastion, image, opacityChange){
     if(stopAnimations || stopBackgroundAnimation) return;
     setTimeout(function() {
         if(stopAnimations || stopBackgroundAnimation) return;
+     
+        let imageOpacity = parseFloat(window.getComputedStyle(image).getPropertyValue("opacity"));
 
-        
-        let imageOpacity = window.getComputedStyle(image).getPropertyValue("opacity");
-        if(imageOpacity < 0.3 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
-        else if(imageOpacity > 0.75 && opacityChange > 0) opacityChange = -opacityChange;
+        if(imageOpacity < 0.1 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
+        else if(imageOpacity > 0.9 && opacityChange > 0) opacityChange = 0 - opacityChange;
         //console.log("image.style.opacity: " + window.getComputedStyle(image).getPropertyValue("opacity") + "\n opacityChange: " + opacityChange);
-        console.log("opacaty: " + imageOpacity + "\nchange: " + opacityChange);
+        //console.log("opacaty: " + imageOpacity + "\nchange: " + opacityChange + "\n" + image);
         
-        image.style.opacity = opacityChange + imageOpacity;
+        image.style.opacity = (opacityChange + imageOpacity);
+        //console.log("b: " + b + " image op: " + window.getComputedStyle(image).getPropertyValue("opacity"));
+
         if(itrastion > 1) backBackgrounAnimation(itrastion - 1, image, opacityChange);
         else{
             imageAnimationPlayingNow--;
