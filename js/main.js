@@ -1,29 +1,48 @@
-var stopAnimations = false;
+//animation sync controllers 
+var stopLeaveAnimations = false;
 var stopBackgroundAnimation = false;
-var animationInProgress = false;
+var leaveAnimationInProgress = false;
+var waitingToPerformMouseOver = false;
+
+// number of background animation being played 
+var imageAnimationPlayingNow = 0;
+var maxImageAnimationPlayingNow = 15;
 
 var backgroundImageIds = [];
 
 /**
  * 
  * @param {int} num image num that call this
- * @param {String} action action to be performd
+ * @param {String} action action to be performed
  */
 function controller(num, action){
     if(action === "over"){
-        stopAnimations = true;
-        if(animationInProgress){
+        waitingToPerformMouseOver = true;
+        stopLeaveAnimations = true;
+        stopBackgroundAnimation = true;
+        if(leaveAnimationInProgress || imageAnimationPlayingNow > 0){
             setTimeout(function() {
                 controller(num, action);
-            }, 5);
+            }, 2);
             return;
         }
+        //performers mouse over actions 
         mouseOver(num);
-        stopAnimations = false;
+        waitingToPerformMouseOver = false;
     }
     else if(action === "leave"){
-        animationInProgress = true;
-        stopAnimations = false;
+        if(waitingToPerformMouseOver) return;
+        stopBackgroundAnimation = true;
+        if(imageAnimationPlayingNow > 0){
+            setTimeout(function() {
+                controller(num, action);
+            }, 2);
+            return;
+        }
+
+        leaveAnimationInProgress = true;
+
+        //performers mouse leave actions
         document.getElementById("mainGridElem" + num).style.opacity = 0.7;
         mouseLeaves(0.34, num);     
     }
@@ -35,7 +54,7 @@ function controller(num, action){
  */
 function mouseOver(num){
     
-    //ajusting opacity
+    //adjusting opacity
     for (var j = 1; j < 7; j++) {
         if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.3;
          else  document.getElementById("mainGridElem" + j).style.opacity = 1;
@@ -43,21 +62,17 @@ function mouseOver(num){
 
     
     var imageCount = -1;
-    var inneHeight = document.getElementById('body').clientHeight;
-    //var minusTop = -Math.floor(inneHeight/20); 
-    //var minusLeft = Math.floor(document.getElementById('body').clientWidth / 20);
+    var innerHeight = document.getElementById('body').clientHeight;
     var imageHeight = document.getElementById("backgroundImg").clientHeight;
 
     var divElem = document.getElementById("backgroundDiv");
-    divElem.style.opacity = 0.5;
+    divElem.style.opacity = 0.7;
     divElem.innerHTML = "";
 
     //remove all elements from image id list
     backgroundImageIds = [];
     
-
     do{
-
         for (var i = 0; i < 3; i++) {
             var id = "backgroundImg" + (++imageCount);
             divElem.innerHTML += "<img src='.././img/SpaceFighter1.png' class='backgroundImg' id='" + id + "'>";
@@ -68,83 +83,92 @@ function mouseOver(num){
             //left position
             document.getElementById(id).style.left = ((i * document.getElementById(id).clientWidth)) + "px";
         }
-    }while(inneHeight > ((imageCount/3) * imageHeight) - 10);
-    stopAnimations = false;
+    }while(innerHeight > ((imageCount/3) * imageHeight) - 10);
+    
+    //starting background animation
+    stopBackgroundAnimation = false;
+    stopLeaveAnimations = false;
     playBackgroundAnimation();
 
 }
-var imageAnimationPlayingNow = 0;
+
+/**
+ * Starts the background animation 
+ */
 function playBackgroundAnimation(){
-    if(stopAnimations || stopBackgroundAnimation) return;
-    while(imageAnimationPlayingNow < 15){
+    if(stopBackgroundAnimation) return;
+    while(imageAnimationPlayingNow < maxImageAnimationPlayingNow){
         let image = document.getElementById(
-            backgroundImageIds[random(0,backgroundImageIds.length,true)]);
-            //backgroundImageIds[1]);
+            backgroundImageIds[random(0,backgroundImageIds.length)]);
         
-        backBackgrounAnimation(
-            random(5,30,true),
-            image,
-            random(-3, 3, true)/100
-        );
         imageAnimationPlayingNow++;
-
-        //console.log(random(-3, 3, true)/100);
-        //imageAnimationPlayingNow++;        
+        backBackgroundAnimation(
+            random(5, 30),
+            image,
+            random(-3, 3)/100
+        );     
     }    
-
 }
 
-//TODO: fix this.........
 /**
- * 
- * @param {int} itrastion 
+ * dancing image
+ * @param {int} iteration 
  * @param {*} image 
  * @param {*} opacityChange 
  */
-function backBackgrounAnimation(itrastion, image, opacityChange){
-    if(stopAnimations || stopBackgroundAnimation) return;
+function backBackgroundAnimation(iteration, image, opacityChange){
+    if(stopBackgroundAnimation){
+        imageAnimationPlayingNow--;
+        return;
+    }
+
     setTimeout(function() {
-        if(stopAnimations || stopBackgroundAnimation) return;
+        if(stopBackgroundAnimation){ 
+            imageAnimationPlayingNow--;
+            return;
+        }
      
         let imageOpacity = parseFloat(window.getComputedStyle(image).getPropertyValue("opacity"));
 
         if(imageOpacity < 0.1 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
         else if(imageOpacity > 0.9 && opacityChange > 0) opacityChange = 0 - opacityChange;
-        //console.log("image.style.opacity: " + window.getComputedStyle(image).getPropertyValue("opacity") + "\n opacityChange: " + opacityChange);
-        //console.log("opacaty: " + imageOpacity + "\nchange: " + opacityChange + "\n" + image);
         
         image.style.opacity = (opacityChange + imageOpacity);
-        //console.log("b: " + b + " image op: " + window.getComputedStyle(image).getPropertyValue("opacity"));
-
-        if(itrastion > 1) backBackgrounAnimation(itrastion - 1, image, opacityChange);
+       
+        if(iteration > 1) backBackgroundAnimation(iteration - 1, image, opacityChange);
         else{
             imageAnimationPlayingNow--;
             playBackgroundAnimation();
-            }
+        }
     }, 25);
 }
+
 /**
- * 
- * @param {float} countup counts up 
+ * @param {float} countUp counts up 
  * @param {int} num image num that call this
  */
-function mouseLeaves(countup, num){
-    if(stopAnimations){
-        animationInProgress = false;
+function mouseLeaves(countUp, num){
+    if(stopLeaveAnimations){
+        leaveAnimationInProgress = false;
         return;
     }
     setTimeout(function() {
-        if(stopAnimations){
-            animationInProgress = false;
+        if(stopLeaveAnimations){
+            leaveAnimationInProgress = false;
             return;
         }
         for (var j = 1; j < 7; j++){
-            if(num != j) document.getElementById("mainGridElem" + j).style.opacity = countup;
+            if(num != j) document.getElementById("mainGridElem" + j).style.opacity = countUp;
         }
-        document.getElementById("backgroundDiv").style.opacity = (0.84-countup);
-        if(countup < 0.7) mouseLeaves(countup + 0.03, num);
+
+        document.getElementById("backgroundDiv").style.opacity = (1-countUp);
+        //backgroundImageIds.forEach(function (element) {
+        //   document.getElementById(element).style.opacity = (0.84-countUp);
+        //});
+
+        if(countUp < 0.7) mouseLeaves(countUp + 0.03, num);
         else {
-            animationInProgress = false;
+            leaveAnimationInProgress = false;
             document.getElementById("backgroundDiv").innerHTML = "";
         }
     }, 30);
@@ -152,19 +176,13 @@ function mouseLeaves(countup, num){
 
 /**
  * get a random number
- * @param {number} from scop
- * @param {number} to scop, but not including
- * @param {boolean} integer, true for integer and false for float
+ * @param {number} from range
+ * @param {number} to range, but not including
  * @returns {num} a random number
  */
-function random(from, to, integer){
-    if(integer) return Math.floor(((to - from) * Math.random()) + from);
-    return ((to - from) * Math.random()) + from;
+function random(from, to){
+    return Math.floor(((to - from) * Math.random()) + from);
 }
-
-//window.addEventListener("onload", init());
-//document.addEventListener("DOMContentLoaded", init(), false);
-//window.addEventListener("resize", init());
 
 /**
     setTimeout(function() {
