@@ -1,0 +1,43 @@
+html,
+body {
+    width: 100%;
+    min-width: 500px;
+    max-width: 800px;
+    height: 100%;
+    margin: 0;
+}
+
+div{
+    margin: 20px;
+    padding-bottom: 100px;
+}
+h2{
+    margin-bottom: 10px;
+}
+h3{
+    margin: 0;
+    margin-left: 20px;
+    font-size: 1.1em;
+}
+
+p{
+    position: relative;
+    margin: 2px;
+    margin-left: 170px;
+    top: -21px;
+    font-size: 1em;
+}
+img{
+    width: 16vw;
+    position: absolute;
+    right: 2vw;
+}
+hr{
+    width: 65vw;
+}
+.emptyOnside{
+    top: 0px;
+}
+.oneLine{
+    margin-top: -20px;
+}

@@ -10,14 +10,11 @@ function frameChange(pageName) {
     removeNow = true;
     var frame = document.getElementById('mainFrame');
     switch (pageName) {
-        case 'cv':
-            frame.contentWindow.document.location.href = './ViewerJS/?zoom=page-width#../CV-Liam Kokab.pdf';
-            return;
         case 'minesweeper':
-            frame.contentWindow.document.location.href = "./minesweeper/";
+            frame.src = "./minesweeper/index.html";
             return;
         default:
-            frame.contentWindow.document.location.href = './pages/' + pageName + '.html';
+            frame.src = './pages/' + pageName + '.html';
     }
 }
 
