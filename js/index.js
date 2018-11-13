@@ -1,6 +1,7 @@
 /**
  * Created by Liam.k on 28.08-2017.
  */
+var pageList = ["main", "CV", "minesweeper", "SpaceFighter"];
 
  /**
   * changes iframe 
@@ -8,14 +9,9 @@
   */
 function frameChange(pageName) {
     removeNow = true;
-    var frame = document.getElementById('mainFrame');
-    switch (pageName) {
-        case 'minesweeper':
-            frame.src = "./minesweeper/index.html";
-            return;
-        default:
-            frame.src = './pages/' + pageName + '.html';
-    }
+    //TODO: fix menu removing 
+
+    var frame = document.getElementById('mainFrame').src = './pages/' + pageName + '.html';
 }
 
 var topOfBD = 0;

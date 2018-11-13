@@ -70,7 +70,7 @@ function genHtmlAndCells() {
             }
             html = html + "<img class='cells' " +
                 "id='" + pos(i,j) +"'" +
-                "src='./img/10.png' onclick='cellClick(" + i +"," + j + ")'" +
+                "src='../img/minesweeper/10.png' onclick='cellClick(" + i +"," + j + ")'" +
                 " />";
             html = html + "</th>";
         }
@@ -152,7 +152,7 @@ function cellClick(i , j) {
     if(cells[i][j].num == 0) openMore(i, j);
     var e = document.getElementById(pos(i, j));
     e.className="cellsT";
-    e.src="./img/" + cells[i][j].num + ".png";
+    e.src="../img/minesweeper/" + cells[i][j].num + ".png";
 }
 
 /**
@@ -184,7 +184,7 @@ function gameOver(msg) {
             if(cells[i][j].touchable == 0){
                 var e = document.getElementById(pos(i, j));
                 e.className="cellsT";
-                e.src="./img/" + cells[i][j].num + ".png";
+                e.src="../img/minesweeper/" + cells[i][j].num + ".png";
             }
         }
     }
