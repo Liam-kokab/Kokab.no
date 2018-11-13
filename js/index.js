@@ -1,7 +1,7 @@
 /**
  * Created by Liam.k on 28.08-2017.
  */
-var pageList = ["main", "CV", "minesweeper", "SpaceFighter"];
+var pageList = ["main", "CV", "MineSweeper", "SpaceFighter"];
 var initDone = false;
 var currentPageName = "main";
 
@@ -47,12 +47,18 @@ function readUrl(){
  */
 function updateUrl(paramName, paramValue){
     var url = window.location.href.split("?")[0] + "?";
-    
     var paramNames = ["page", "mode", "lang"];
+    var tempParamList = [];
+
     for (var i = 0; i < paramNames.length; i++){
-        if(paramNames[i] === paramName)
-            url += paramName + "=" + paramValue + ((i != 2)? "&" : "");
-        else if(getURLParam(paramNames[i]) != null)
+        if(paramNames[i] === paramName && paramValue != "main"){
+            tempParamList.push({name : paramNames[i] , value : paramValue});
+        }
+/////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+            url += paramName + "=" + paramValue;
+        else if(getURLParam(paramNames[i]) != null && paramValue != "main")
             url += paramNames[i] + "=" + getURLParam(paramNames[i]) + ((i != 2)? "&" : "");   
     }
     history.pushState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
@@ -64,11 +70,13 @@ function updateUrl(paramName, paramValue){
   * @param {String} pageName 
   */
 function frameChange(pageName) {
+    //start loading new page first :)
+    var frame = document.getElementById('mainFrame').src = './pages/' + pageName + '.html';
     //showMenu();
     document.title = "Liam Kokab" + ((pageName === "main")? "" : " - " + pageName);
     currentPageName = pageName;
     updateUrl("page",pageName);
-    var frame = document.getElementById('mainFrame').src = './pages/' + pageName + '.html';
+    
     //updateUrl("page",pageName);
 }
 
