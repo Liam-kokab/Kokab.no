@@ -10,6 +10,8 @@ function init(){
     if(initDone) return;
     initDone = true;
     readUrl();
+    // call readUrl when history pops
+    window.onpopstate = readUrl;  
 }
 
 /**
@@ -37,6 +39,7 @@ function readUrl(){
     paramValue = getURLParam("lang");
     if(paramValue === "no") {
         //TODO: add lang support
+        //for CV this happens in frameChange
     }
 }
 
@@ -51,10 +54,11 @@ function updateUrl(paramName, paramValue){
     var tempParamList = [];
 
     for (var i = 0; i < paramNames.length; i++){
-        if(paramNames[i] === paramName && paramValue != "main"){
+        if(paramValue === "main" && paramNames[i] === "page") continue;
+        if(paramNames[i] === paramName){
             tempParamList.push({name : paramNames[i] , value : paramValue});
         }
-        else if(getURLParam(paramNames[i]) != null && paramValue != "main")
+        else if(getURLParam(paramNames[i]) != null)
         tempParamList.push({name : paramNames[i] , value : getURLParam(paramNames[i])});
     }
     if(tempParamList.length > 0) url += "?";
@@ -63,7 +67,10 @@ function updateUrl(paramName, paramValue){
         ((j < tempParamList.length -1)? "&" : "");        
     }
 
+    document.title = "Liam Kokab" + ((currentPageName === "main")? "" : " - " + currentPageName);
+    //history.replaceState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
     history.pushState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
+    
 }
 
 
@@ -72,15 +79,18 @@ function updateUrl(paramName, paramValue){
   * @param {String} pageName 
   */
 function frameChange(pageName) {
-    //start loading new page first :)
-    var frame = document.getElementById('mainFrame').src = './pages/' + pageName + '.html';
+    var ifr = document.getElementById("mainFrame");
+    if(pageName === "CV" && getURLParam("lang") === "no")
+        ifr.contentWindow.location.replace('./pages/' + pageName + '-no.html');
+    else ifr.contentWindow.location.replace('./pages/' + pageName + '.html');
     //showMenu();
-    document.title = "Liam Kokab" + ((pageName === "main")? "" : " - " + pageName);
     currentPageName = pageName;
-    updateUrl("page",pageName);
+    if(!(pageName === getURLParam("page") || (getURLParam("page") === null && pageName === "main")))
+        updateUrl("page",pageName);
     
-    //updateUrl("page",pageName);
 }
+
+
 
 var topOfBD = 0;
 function showMenu() {
