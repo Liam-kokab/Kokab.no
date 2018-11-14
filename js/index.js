@@ -46,7 +46,7 @@ function readUrl(){
  * @param {String} paramValue 
  */
 function updateUrl(paramName, paramValue){
-    var url = window.location.href.split("?")[0] + "?";
+    var url = window.location.href.split("?")[0];
     var paramNames = ["page", "mode", "lang"];
     var tempParamList = [];
 
@@ -54,13 +54,15 @@ function updateUrl(paramName, paramValue){
         if(paramNames[i] === paramName && paramValue != "main"){
             tempParamList.push({name : paramNames[i] , value : paramValue});
         }
-/////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-            url += paramName + "=" + paramValue;
         else if(getURLParam(paramNames[i]) != null && paramValue != "main")
-            url += paramNames[i] + "=" + getURLParam(paramNames[i]) + ((i != 2)? "&" : "");   
+        tempParamList.push({name : paramNames[i] , value : getURLParam(paramNames[i])});
     }
+    if(tempParamList.length > 0) url += "?";
+    for (var j = 0; j < tempParamList.length; j++) {
+        url += tempParamList[j].name + "=" + tempParamList[j].value + 
+        ((j < tempParamList.length -1)? "&" : "");        
+    }
+
     history.pushState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
 }
 
