@@ -50,6 +50,16 @@ body {
     width: 42%;
     opacity: 0.5;
 }
+
+.glass{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background-color: black;
+    opacity: .7;
+}
+
 @media screen and (orientation: landscape) {
     .mainGridDiv{
         grid-template-columns: 1fr 1fr 1fr;

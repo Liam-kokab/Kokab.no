@@ -28,7 +28,7 @@ function controller(num, action){
         if(leaveAnimationInProgress || imageAnimationPlayingNow > 0){
             setTimeout(function() {
                 controller(num, action);
-            }, 2);
+            }, 3);
             return;
         }
         //performers mouse over actions 
@@ -42,7 +42,7 @@ function controller(num, action){
         if(imageAnimationPlayingNow > 0){
             setTimeout(function() {
                 controller(num, action);
-            }, 2);
+            }, 3);
             return;
         }
 
@@ -109,17 +109,17 @@ function mouseOver(num){
 function playBackgroundAnimation(){
     if(stopBackgroundAnimation) return;
     while(imageAnimationPlayingNow < maxImageAnimationPlayingNow &&
-        imageAnimationPlayingNow <= backgroundImageIds.length){
+        imageAnimationPlayingNow < backgroundImageIds.length){
 
         imageAnimationPlayingNow++;
-        let image = document.getElementById(
+        var image = document.getElementById(
             backgroundImageIds[random(0,backgroundImageIds.length)]);
         //start animation thread            
         backBackgroundAnimation(
             random(5, 30),
             image,
             random(-25, 25)/1000
-        );     
+        ); 
     }    
 }
 
@@ -139,7 +139,7 @@ function backBackgroundAnimation(iteration, image, opacityChange){
             imageAnimationPlayingNow--;
             return;
         }
-        let imageOpacity;
+        var imageOpacity;
         try {
             imageOpacity = parseFloat(window.getComputedStyle(image).getPropertyValue("opacity"));
         }catch(error) { imageOpacity = 0.5; }
@@ -176,12 +176,9 @@ function mouseLeaves(countUp, num){
         for (var j = 1; j < 7; j++){
             if(num != j) document.getElementById("mainGridElem" + j).style.opacity = countUp;
         }
-        let color = countUp * 350;
+        var color = countUp * 350;
         document.getElementById("body").style.backgroundColor = 'rgb(' + [color,color,color].join(',') + ')';
         document.getElementById("backgroundDiv").style.opacity = (1-countUp);
-        //backgroundImageIds.forEach(function (element) {
-        //   document.getElementById(element).style.opacity = (0.84-countUp);
-        //});
 
         if(countUp < 0.7) mouseLeaves(countUp + 0.03, num);
         else {
@@ -206,9 +203,9 @@ function random(from, to){
  * pre-loads background images
  */
 function loadImages(){
-    let body = document.getElementById("body");
-    for (let i = 1; i < 7; i++) {
-        let imageG = getImageInfo(i);
+    var body = document.getElementById("body");
+    for (var i = 1; i < 7; i++) {
+        var imageG = getImageInfo(i);
 
         body.innerHTML += "<img src='" +
                 imageG.folder + imageG.names[0] +
@@ -216,7 +213,7 @@ function loadImages(){
                 imageG.sampleImageId +
                 "' style='top: -500px;'></img>";
 
-        for (let j = 1; j < imageG.names.length; j++) {
+        for (var j = 1; j < imageG.names.length; j++) {
             body.innerHTML += "<img src='" +
                 imageG.folder + imageG.names[j] +
                 "' class='backgroundImg'" +
