@@ -55,16 +55,16 @@ hr{
     x = screenSize - 284 
 */
 
-@media only screen and (min-width: 1084px) {
+@media only screen and (min-width: 1120px) {
     img{
         position: fixed;
-        left: 916px;
+        left: 956px;
     }
 }
-@media only screen and (min-width: 886px) and (max-width: 1084px){
+@media only screen and (min-width: 920px) and (max-width: 1120px){
     img{
         position: absolute;
-        left: 737px;  
+        left: 777px;  
     }
 }
 @media only screen and (orientation: portrait) {
