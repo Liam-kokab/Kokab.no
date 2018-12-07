@@ -147,8 +147,10 @@ function backBackgroundAnimation(iteration, image, opacityChange){
         if(imageOpacity < 0.1 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
         else if(imageOpacity > 0.9 && opacityChange > 0) opacityChange = 0 - opacityChange;
         
-        image.style.opacity = (opacityChange + imageOpacity);
-       
+        //try for safety
+        try{ 
+            image.style.opacity = (opacityChange + imageOpacity);
+        }catch(error){}
         if(iteration > 1) backBackgroundAnimation(iteration - 1, image, opacityChange);
         else{
             imageAnimationPlayingNow--;

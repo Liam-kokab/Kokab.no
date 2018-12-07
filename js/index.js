@@ -11,7 +11,12 @@ function init(){
     initDone = true;
     readUrl();
     // call readUrl when history pops
-    window.onpopstate = readUrl;  
+    window.onpopstate = readUrl; 
+    window.onbeforeunload = updateHistory; 
+}
+
+function updateHistory(){
+    history.pushState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
 }
 
 /**
@@ -66,10 +71,9 @@ function updateUrl(paramName, paramValue){
         url += tempParamList[j].name + "=" + tempParamList[j].value + 
         ((j < tempParamList.length -1)? "&" : "");        
     }
-
-    document.title = "Liam Kokab" + ((currentPageName === "main")? "" : " - " + currentPageName);
-    //history.replaceState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
-    history.pushState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
+    
+    // push page to history.
+    history.replaceState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
     
 }
 
@@ -83,7 +87,11 @@ function frameChange(pageName) {
     if(pageName === "CV" && getURLParam("lang") === "no")
         ifr.contentWindow.location.replace('./pages/' + pageName + '-no.html');
     else ifr.contentWindow.location.replace('./pages/' + pageName + '.html');
-    //showMenu();
+    //TODO: remove menu if need be showMenu();
+
+    // set page title to current page name.
+    document.title = "Liam Kokab" + ((pageName === "main")? "" : " - " + pageName);
+
     currentPageName = pageName;
     if(!(pageName === getURLParam("page") || (getURLParam("page") === null && pageName === "main")))
         updateUrl("page",pageName);
@@ -111,7 +119,7 @@ function showMenu() {
     }
     menuIsShowing = !menuIsShowing;
 }
-/*
+/**
 function closeMenu(elem){
     console.log(window.innerHeight);
     console.log("top: " + topOfBD);
