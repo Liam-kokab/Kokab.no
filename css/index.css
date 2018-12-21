@@ -37,15 +37,18 @@ body {
 
 .button {
     text-align: center;
+    display: block;
     width: 210px;
-    border: none;
-    height: 42px;
+    height: 37px;
     margin-top: 18px;
+    padding-top: 6px;
     box-shadow: -3px 5px 10px #515151;
     background-color: #1a3256;
     color: #FFFFFF;
     font-size: 25px;
-    transition: all .15s ease-in-out;
+    text-decoration: none;
+    border: none;
+    transition: all .10s ease-in-out;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -54,7 +57,7 @@ body {
 }
 
 .button:hover {
-    transform: scale(1.05);
+    transform: scale(1.04);
     box-shadow: -6px 6px 10px #515151;
     cursor: pointer;
 }

@@ -4,15 +4,13 @@
 var pageList = ["main", "CV", "MineSweeper", "SpaceFighter"];
 var initDone = false;
 var currentPageName = "main";
+var lastPage = null;
 
 
 function init(){
     if(initDone) return;
     initDone = true;
     readUrl();
-    // call readUrl when history pops
-    window.onpopstate = readUrl; 
-    window.onbeforeunload = updateHistory; 
 }
 
 function updateHistory(){
@@ -73,10 +71,13 @@ function updateUrl(paramName, paramValue){
     }
     
     // push page to history.
-    history.replaceState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
-    
+    //history.replaceState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
+    window.location.href = url;
 }
 
+function frameChange1(pageName) {
+    updateUrl("page", pageName);
+}
 
 /**
   * changes iframe 
@@ -87,18 +88,13 @@ function frameChange(pageName) {
     if(pageName === "CV" && getURLParam("lang") === "no")
         ifr.contentWindow.location.replace('./pages/' + pageName + '-no.html');
     else ifr.contentWindow.location.replace('./pages/' + pageName + '.html');
+    
     //TODO: remove menu if need be showMenu();
 
     // set page title to current page name.
     document.title = "Liam Kokab" + ((pageName === "main")? "" : " - " + pageName);
-
-    currentPageName = pageName;
-    if(!(pageName === getURLParam("page") || (getURLParam("page") === null && pageName === "main")))
-        updateUrl("page",pageName);
-    
+  
 }
-
-
 
 var topOfBD = 0;
 function showMenu() {
