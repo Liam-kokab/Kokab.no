@@ -8,13 +8,14 @@ body {
 }
 
 .controller{
-    position: fixed;
-    top: -22px;
+    position: absolute;
+    top: -27px;
     left: calc(50% - 78px);
     border-radius: 20px;
-    height: 40px;
-    width: 156px;
-    padding-top: 25px;
+    height: 32px;
+    width: 124px;
+    padding-top: 31px;
+    padding-bottom: 4px;
     text-align: center;
     z-index: 200;
     background-color: rgba(0,0,0, 0.2);
@@ -23,6 +24,10 @@ body {
 .controlButton{
     position: relative;
     height: inherit;
+}
+
+.print{
+    display: none;
 }
 a{
     height: inherit;
@@ -35,10 +40,9 @@ a{
     max-width: 900px;
     text-align: left;
     margin: 0;
-    margin-bottom: 100px;
     padding: 20px;
-
-    box-shadow: 4px 4px 10px 2px #7e7e7e;
+    padding-bottom: 120px;
+    box-shadow: 5px -10px 10px 4px #7e7e7e;
 }
 h2{
     margin-bottom: 10px;
@@ -63,7 +67,7 @@ p{
     right: 2vw;
     top: 10px;  
 
-    box-shadow: 4px 4px 10px 2px #7e7e7e;
+    box-shadow: 4px 4px 10px -1px #7e7e7e;
 }
 hr{
     width: auto;
@@ -100,3 +104,15 @@ hr{
         margin-top: 0;
     }
 }
+@media print {
+    .controller{
+        display: none;
+    }
+
+    .print{
+        display: block;
+    }
+    .special-hr{
+        display: none;
+    }
+  }
