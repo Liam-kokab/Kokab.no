@@ -33,17 +33,22 @@ function readUrl(){
     var paramValue = getURLParam("page");
     if(pageList.includes(paramValue)) frameChange(paramValue);
     else frameChange("main");
-
+    var hrefParam = "";
     paramValue = getURLParam("mode");
     if(paramValue === "dark") {
         //TODO: add mode support
+        hrefParam += "&dark="+paramValue;
     }
 
     paramValue = getURLParam("lang");
     if(paramValue === "no") {
         //TODO: add lang support
         //for CV this happens in frameChange
+        hrefParam += "&lang=" + paramValue;
     }
+    var buttons = document.getElementsByClassName("internalLink");
+    if(hrefParam.length > 0) for (var i = 0; i < buttons.length; i++)
+       buttons[i].href += hrefParam;
 }
 
 /**
