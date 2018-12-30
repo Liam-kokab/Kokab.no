@@ -27,7 +27,7 @@ function getURLParam(paramName){
 }
 
 /**
- * reads and perform changes if needed
+ * reads url and perform changes if needed
  */
 function readUrl(){
     var paramValue = getURLParam("page");
@@ -74,9 +74,7 @@ function updateUrl(paramName, paramValue){
         url += tempParamList[j].name + "=" + tempParamList[j].value + 
         ((j < tempParamList.length -1)? "&" : "");        
     }
-    
-    // push page to history.
-    //history.replaceState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
+    //update url
     window.location.href = url;
 }
 
@@ -94,7 +92,8 @@ function frameChange(pageName) {
         ifr.contentWindow.location.replace('./pages/' + pageName + '-no.html');
     else ifr.contentWindow.location.replace('./pages/' + pageName + '.html');
     
-    //TODO: remove menu if need be showMenu();
+    //hide menu if need be 
+    hideMenu();
 
     // set page title to current page name.
     document.title = "Liam Kokab" + ((pageName === "main")? "" : " - " + pageName);
@@ -102,6 +101,9 @@ function frameChange(pageName) {
 }
 
 var topOfBD = 0;
+/**
+ * shows the menu
+ */
 function showMenu() {
     var menuButton = document.getElementById('menuButton');
     var buttonDiv = document.getElementById('buttonDiv');
@@ -110,28 +112,13 @@ function showMenu() {
     if (menuIsShowing) {
         menuButton.innerHTML = '<i class="fa">&#xf00d;</i>';
         buttonDiv.style.display = 'inherit';
-    } else {
-        menuButton.innerHTML = '<i class="fa">&#xf0c9;</i>';
-        //TODO: Fix removing of the menu!
-        //topOfBD = 0;
-        //closeMenu(buttonDiv);
-        buttonDiv.style.display = 'none';
-        
+    }else{
+        hideMenu();
     }
     menuIsShowing = !menuIsShowing;
 }
-/**
-function closeMenu(elem){
-    console.log(window.innerHeight);
-    console.log("top: " + topOfBD);
-    setTimeout(function() {
-        if (window.innerHeight + topOfBD > 0) {
-           elem.style.top = topOfBD + 'px';
-           topOfBD = topOfBD - 50;
-        } else {
-            elem.style.display = 'none';
-            return;
-        }
-    }, 50);
-    closeMenu(elem,top);
-}*/
+function hideMenu(){
+    if(menuButton.style.display === "none") return;
+    menuButton.innerHTML = '<i class="fa">&#xf0c9;</i>';
+    buttonDiv.style.display = 'none';
+}
