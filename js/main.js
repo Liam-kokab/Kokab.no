@@ -34,8 +34,8 @@ function controller(num, action){
         //performers mouse over actions 
         mouseOver(num);
         MouseOverInProgress = false;
-    }
-    else if(action === "leave"){
+    
+    }else if(action === "leave"){
         if(MouseOverInProgress) return;
 
         stopBackgroundAnimation = true;
