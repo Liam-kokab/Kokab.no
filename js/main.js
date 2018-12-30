@@ -75,7 +75,7 @@ function mouseOver(num){
     var imageHeight = document.getElementById(images.sampleImageId).clientHeight;
 
     var divElem = document.getElementById("backgroundDiv");
-    divElem.style.opacity = 0.7;
+    divElem.style.opacity = 1;
     divElem.innerHTML = "";
 
     //remove all elements from image id list
