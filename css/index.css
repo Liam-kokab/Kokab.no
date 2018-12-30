@@ -16,6 +16,9 @@ body {
     margin-top: 10px;
     margin-left: 0px;
 }
+.internalLink{
+    text-decoration: none;
+}
 
 .headDiv {
     background-color: white;
@@ -118,6 +121,7 @@ body {
 }
 
 .over {
+    color: black;
     font-weight: normal;
     top: 0px;
     margin-top: 0;

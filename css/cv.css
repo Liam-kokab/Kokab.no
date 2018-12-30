@@ -5,6 +5,7 @@ body {
     height: 100%;
     margin: 0;
     text-align: center;
+    font-family: "Times New Roman", Times, serif;
 }
 
 .controller{
@@ -24,8 +25,27 @@ body {
 .controlButton{
     position: relative;
     height: inherit;
-}
 
+}
+.controlButton:hover{
+    cursor: pointer;
+}
+table{
+    text-align: left;
+    margin-top: 3px;
+    margin: 0;
+}
+.firstColumn{
+    text-align: left;
+    width: 131px;
+    padding-left: 7px;
+    margin: 0;
+}
+.secondColumn{
+    text-align: left;
+    font-weight: normal;
+    margin: 0px;
+}
 .print{
     display: none;
 }
@@ -45,74 +65,52 @@ a{
     box-shadow: 5px -10px 10px 4px #7e7e7e;
 }
 h2{
-    margin-bottom: 10px;
-}
-h3{
     margin: 0;
-    margin-left: 20px;
-    font-size: 1.1em;
+    margin-left: 9px;
+    font-size: 1.2em;
 }
 
 p{
-    position: relative;
-    margin: 2px;
-    margin-left: 170px;
-    top: -21px;
-    font-size: 1em;
+    margin: 3px 15px 0 9px;
+    font-weight: bold;
 }
+
 .mainImg{
-    width: 15.8vw;
-    max-width: 150px;
+    width: 100px;
     position: absolute;
     right: 2vw;
     top: 10px;  
-
     box-shadow: 4px 4px 10px -1px #7e7e7e;
 }
 hr{
     width: auto;
 }
-.emptyOnside{
-    top: 0px;
-}
-.oneLine{
-    margin-top: -20px;
-}
+
+
 /**
     x = screenSize - 284 
 */
-
-@media only screen and (min-width: 1120px) {
-    .mainImg{
-        position: fixed;
-        left: 956px;
-    }
-}
-@media only screen and (min-width: 920px) and (max-width: 1120px){
+@media only screen and (min-width: 920px) {
     .mainImg{
         position: absolute;
         left: 777px;  
     }
-}
-@media only screen and (orientation: portrait) {
-    p{
-        position: inherit;
-        margin: 5px;
-        margin-left: 40px;
-    }
-    .oneLine{
-        margin-top: 0;
+    .controller{
+        left: 400px;
     }
 }
 @media print {
     .controller{
         display: none;
     }
-
     .print{
-        display: block;
+        display: table-row;
     }
     .special-hr{
         display: none;
+    }
+    .mainDiv{
+        padding-bottom: 0;
+        box-shadow: none;
     }
   }
