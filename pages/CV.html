@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>CV-Liam Kokab</title>
     <link rel="stylesheet" type="text/css" href="../css/cv.css">
-    <script>
-        function print1(){
-            window.print();
+
+    <script language="javascript">
+        function changeLangLink(){
+            document.getElementById("langLink").href = "../index.html?page=CV&lang=no";
         }
     </script>
 
@@ -15,9 +16,9 @@
 
     <div class="mainDiv">
         <div class="controller" >
-            <a href="../index.html?page=CV&lang=no" target="_top"><img class="controlButton" src="../icon/no.svg" alt="Norsk"/></a>
-            <a href="../CV/Liam-Kokab-CV-eng.pdf" target="_blank"><img class="controlButton" src="../icon/pdf3.svg" alt="lastned pdf"></a>
-            <img class="controlButton" src="../icon/print3.svg" onclick="print1()" alt="skriv ut">
+            <a href="./CV-no.html" target="_top" title="Norsk" id="langLink"><img class="controlButton" src="../icon/no.svg" alt="Norsk"/></a>
+            <a href="../CV/Liam-Kokab-CV-eng.pdf" target="_blank" title="Download PDF" download><img class="controlButton" src="../icon/pdf3.svg" alt="lastned pdf" onload="changeLangLink()"></a>
+            <img class="controlButton" src="../icon/print3.svg" onclick="window.print()" alt="Print" title="Print">
         </div>
 
         <img class="mainImg" src="../img/Liam-Kokab.png">

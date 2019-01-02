@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>CV-Liam Kokab</title>
     <link rel="stylesheet" type="text/css" href="../css/cv.css">
+
     <script>
-        function print1(){
-            window.print();
+        function changeLangLink(){
+            document.getElementById("langLink").href = "../index.html?page=CV";
         }
     </script>
 
@@ -15,9 +16,9 @@
 
     <div class="mainDiv">
         <div class="controller" >
-            <a href="../index.html?page=CV" target="_top"><img class="controlButton" src="../icon/eng.svg" alt="Engelsk"/></a>
-            <a href="../CV/Liam-Kokab-CV-no.pdf" target="_blank"><img class="controlButton" src="../icon/pdf3.svg" alt="lastned pdf"></a>
-            <img class="controlButton" src="../icon/print3.svg" onclick="print1()" alt="skriv ut">
+            <a id="langLink" href="./CV.html" target="_top" title="English"><img class="controlButton" src="../icon/eng.svg" alt="Engelsk" onload="changeLangLink()"/></a>
+            <a href="../CV/Liam-Kokab-CV-no.pdf" target="_blank" title="Lastned PDF" download><img class="controlButton" src="../icon/pdf3.svg" alt="lastned pdf"></a>
+            <img class="controlButton" src="../icon/print3.svg" onclick="window.print()" alt="skriv ut" title="Skriv ut">
         </div>
 
         <img class="mainImg" src="../img/Liam-Kokab.png">

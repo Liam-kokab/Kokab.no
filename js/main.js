@@ -16,7 +16,6 @@ var maxImageAnimationPlayingNow = 10;
 var backgroundImageIds = [];
 
 /**
- * 
  * @param {int} num image num that call this
  * @param {String} action action to be performed
  */
