@@ -138,7 +138,7 @@ function backBackgroundAnimation(iteration, image, opacityChange){
             imageAnimationPlayingNow--;
             return;
         }
-        var imageOpacity;
+        var imageOpacity = 0.0;
         try {
             imageOpacity = parseFloat(window.getComputedStyle(image).getPropertyValue("opacity"));
         }catch(error) { imageOpacity = 0.5; }

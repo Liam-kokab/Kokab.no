@@ -13,13 +13,9 @@ function init(){
     readUrl();
 }
 
-function updateHistory(){
-    history.pushState("Liam Kokab - " + currentPageName , "Liam Kokab - " + currentPageName, url);
-}
-
 /**
  * @param {String} paramName 
- * @returns param value 
+ * @returns {String} param value 
  */
 function getURLParam(paramName){
     var url = new URL(window.location.href);
@@ -78,10 +74,6 @@ function updateUrl(paramName, paramValue){
     window.location.href = url;
 }
 
-function frameChange1(pageName) {
-    updateUrl("page", pageName);
-}
-
 /**
   * changes iframe 
   * @param {String} pageName 
@@ -95,12 +87,11 @@ function frameChange(pageName) {
     //hide menu if need be 
     hideMenu();
 
-    // set page title to current page name.
+    //set page title to current page name.
     document.title = "Liam Kokab" + ((pageName === "main")? "" : " - " + pageName);
   
 }
 
-var topOfBD = 0;
 /**
  * shows the menu
  */
@@ -117,6 +108,9 @@ function showMenu() {
     }
     menuIsShowing = !menuIsShowing;
 }
+/**
+ * hide the menu
+ */
 function hideMenu(){
     if(menuButton.style.display === "none") return;
     menuButton.innerHTML = '<i class="fa">&#xf0c9;</i>';
