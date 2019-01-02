@@ -15,15 +15,28 @@ var maxImageAnimationPlayingNow = 10;
 //list of background image ids
 var backgroundImageIds = [];
 
+//page tool tips
+var toolTips = [
+    "We are already her! Click for nothing to happen",
+    "CV, not much more to say... Have fun reading",
+    "MineSweeper, becurse I was bored an evening",
+    "SpaceFighter, a game based on PlayCanvas engine",
+    "Solias Boligstyling, website I made :)",
+    "My GitHub Page!"
+];
+
+
 /**
  * @param {int} num image num that call this
  * @param {String} action action to be performed
  */
 function controller(num, action){
     if(action === "over"){
-        MouseOverInProgress = true;
-        stopLeaveAnimations = true;
-        stopBackgroundAnimation = true;
+        //if(num != 1){}
+            MouseOverInProgress = true;
+            stopLeaveAnimations = true;
+            stopBackgroundAnimation = true;
+        
         if(leaveAnimationInProgress || imageAnimationPlayingNow > 0){
             setTimeout(function() {
                 controller(num, action);
@@ -48,7 +61,7 @@ function controller(num, action){
         leaveAnimationInProgress = true;
 
         //performers mouse leave actions
-        document.getElementById("mainGridElem" + num).style.opacity = 0.7;
+        document.getElementById("mainGridElem" + num).style.opacity = 1;
         mouseLeaves(0.34, num);     
     }
 }
@@ -58,16 +71,20 @@ function controller(num, action){
  * @param {int} num image number that call this.
  */
 function mouseOver(num){
+    //show tool tip
+    var ToolTipText = document.getElementById("ToolTip");
+    ToolTipText.style.opacity = 1;
+    ToolTipText.innerHTML = toolTips[num-1];
     
     //adjusting opacity of icons
     for (var j = 1; j < 7; j++) {
-        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.3;
+        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.7;
          else  document.getElementById("mainGridElem" + j).style.opacity = 1;
     }
 
     var imageCount = -1;
     var innerHeight = document.getElementById('body').clientHeight;
-    document.getElementById('body').style.backgroundColor = 'rgb(' + [100,100,100].join(',') + ')';
+    document.getElementById('body').style.backgroundColor = 'rgb(100,100,100)';
 
     //getting info for image 
     var images = getImageInfo(num);
@@ -143,8 +160,8 @@ function backBackgroundAnimation(iteration, image, opacityChange){
             imageOpacity = parseFloat(window.getComputedStyle(image).getPropertyValue("opacity"));
         }catch(error) { imageOpacity = 0.5; }
         
-        if(imageOpacity < 0.1 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
-        else if(imageOpacity > 0.9 && opacityChange > 0) opacityChange = 0 - opacityChange;
+        if(imageOpacity < 0.05 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
+        else if(imageOpacity > 0.5 && opacityChange > 0) opacityChange = 0 - opacityChange;
         
         //try for safety
         try{ 
@@ -163,6 +180,11 @@ function backBackgroundAnimation(iteration, image, opacityChange){
  * @param {int} num image num that call this
  */
 function mouseLeaves(countUp, num){
+    //hide tool tip
+    var ToolTipText = document.getElementById("ToolTip");
+    ToolTipText.style.opacity = 0;
+    ToolTipText.innerHTML = "";
+
     if(stopLeaveAnimations){
         document.getElementById("body").style.backgroundColor = "white";
         leaveAnimationInProgress = false;
@@ -181,7 +203,7 @@ function mouseLeaves(countUp, num){
         document.getElementById("body").style.backgroundColor = 'rgb(' + [color,color,color].join(',') + ')';
         document.getElementById("backgroundDiv").style.opacity = (1-countUp);
 
-        if(countUp < 0.7) mouseLeaves(countUp + 0.03, num);
+        if(countUp < 1) mouseLeaves(countUp + 0.05, num);
         else {
             document.getElementById("body").style.backgroundColor = "white";
             document.getElementById("backgroundDiv").innerHTML = "";
@@ -235,20 +257,20 @@ function getImageInfo (num){
      * @param {Number} count 
      * @param {String} sampleImageId 
      */
-    function image(num, names, count, sampleImageId){
-        this.folder = "../img/" + num + "/";
+    function image(num, names){
+        this.folder = "../img/mainImages/" + "/";
         this.names = names; 
-        this.numberOfImages = count;
-        this.sampleImageId = sampleImageId;
+        this.numberOfImages = names.length;
+        this.sampleImageId = "sampleImageId" + num;
         //height = document.getElementById(this.sampleImageId).clientHeight;  
         height = 5;
     }
     switch(num){ 
-        case 1: return new image(num, ["testImage.png"]                         , 1, "sampleImageId1");
-        case 2: return new image(num, ["CV.png"]                                , 1, "sampleImageId2");
-        case 3: return new image(num, ["minesweeper1.png", "minesweeper2.png"]  , 2, "sampleImageId3");
-        case 4: return new image(num, ["sf1.png", "sf2.png", "sf3.png"]         , 3, "sampleImageId4");
-        case 5: return new image(num, ["Solias1.png", "Solias2.png"]            , 2, "sampleImageId5");
-        case 6: return new image(num, ["GitHub.svg"]                            , 1, "sampleImageId6");
+        case 1: return new image(num, ["Home.png","CV.png","minesweeper.png", "SpaceFighter.png"]);
+        case 2: return new image(num, ["CV2.png"]);
+        case 3: return new image(num, ["minesweeper1.png", "minesweeper2.png"]);
+        case 4: return new image(num, ["sf1.png", "sf2.png", "sf3.png"]);
+        case 5: return new image(num, ["Solias1.png", "Solias2.png"]);
+        case 6: return new image(num, ["GitHub.png"]);
     }
 }
