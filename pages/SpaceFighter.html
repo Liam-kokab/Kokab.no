@@ -5,8 +5,9 @@
     <title>Title</title>
     <style type="text/css">
         .fighter{
-            width: 99vw;
-            padding: 0px 0px 0px 0px;
+            width: 100%;
+            padding: 0;
+            margin: 0;
             height: calc(100vw * 0.372) ;
             border: 0;
             overflow:hidden;
@@ -16,11 +17,43 @@
             height: 100%;
             overflow:hidden;
         }
+        .fullScreenButton{
+            position: fixed;
+            top: 2%;
+            left: 2%;
+            z-index: 200;
+        }
+
+        .mainDiv{
+            height: 100vh;
+            width: 100vw;
+            padding: 0;
+            margin: 0;
+        }
     </style>
+    <script>
+        
+        function openFullscreen() {
+            var elem = document.getElementById("mainDiv"); 
+            console.log(elem);
+            if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+            elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+            elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+            elem.msRequestFullscreen();
+            }
+        }
+    </script>
+    
 </head>
 <body>
-
-<iframe class="fighter" src="https://playcanv.as/p/ZJsO4gqs/"/>
+    <div class="mainDiv" id="mainDiv">
+        <button onclick="openFullscreen()" class="fullScreenButton"> FullScreen </button>
+        <iframe class="fighter" id="fighter" src="https://playcanv.as/p/ZJsO4gqs/"/>
+    </div>
 
 </body>
 </html>
