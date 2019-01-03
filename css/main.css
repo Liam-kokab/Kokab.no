@@ -38,6 +38,10 @@ body {
     transform: scale(1.04);
     cursor: pointer;
 }
+.github{
+    background-color: rgba(240, 240, 240, 0.8);
+    border-radius: 50%;
+}
 .backgroundDiv{
     height: 120%;
     width: 120%;

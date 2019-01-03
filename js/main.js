@@ -278,11 +278,11 @@ function getImageInfo (num){
     }
     switch(num){ 
         case 1: return new image(num, ["Home.png","CV.png","minesweeper.png", "SpaceFighter.png"]);
-        case 2: return new image(num, ["CV2.png"]);
+        case 2: return new image(num, ["CV1.png","CV2.png","CV2.png"]);
         case 3: return new image(num, ["minesweeper1.png", "minesweeper2.png"]);
         case 4: return new image(num, ["sf1.png", "sf2.png", "sf3.png"]);
         case 5: return new image(num, ["Solias1.png", "Solias2.png"]);
-        case 6: return new image(num, ["GitHub.png"]);
+        case 6: return new image(num, ["GitHub.png","github1.png","git.png"]);
     }
 }
 
