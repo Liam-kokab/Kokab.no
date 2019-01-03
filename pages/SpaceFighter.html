@@ -22,8 +22,16 @@
             top: 2%;
             left: 2%;
             z-index: 200;
+            width: 4%;
+            padding: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
         }
-
+        .fullScreenButton:hover{
+            cursor: pointer;
+            width: 4.2%;
+            top: 1.9%;
+            left: 1.9%;
+        }
         .mainDiv{
             height: 100vh;
             width: 100vw;
@@ -35,7 +43,6 @@
         
         function openFullscreen() {
             var elem = document.getElementById("mainDiv"); 
-            console.log(elem);
             if (elem.requestFullscreen) {
             elem.requestFullscreen();
             } else if (elem.mozRequestFullScreen) { /* Firefox */
@@ -45,13 +52,37 @@
             } else if (elem.msRequestFullscreen) { /* IE/Edge */
             elem.msRequestFullscreen();
             }
+            changeButton();
+        }
+
+        function closeFullscreen() {
+            var elem = document.getElementById("mainDiv"); 
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE/Edge */
+                document.msExitFullscreen();
+            }
+            changeButton();
+        }
+
+        function changeButton(){
+            var button = document.getElementsByClassName("fullScreenButton");
+            for (var i = 0; i < button; i++) {
+                if(button[i].style.display == "none") button[i].style.display = "inherit";
+                else button[i].style.display = "none";
+            }
         }
     </script>
     
 </head>
 <body>
     <div class="mainDiv" id="mainDiv">
-        <button onclick="openFullscreen()" class="fullScreenButton"> FullScreen </button>
+        <img src="../icon/fullscreen.svg" onclick="openFullscreen()" class="fullScreenButton"/> 
+        <img src="../icon/closeFullscreen.svg" onclick="closeFullscreen()" class="fullScreenButton" style="display: none;"/> 
         <iframe class="fighter" id="fighter" src="https://playcanv.as/p/ZJsO4gqs/"/>
     </div>
 
