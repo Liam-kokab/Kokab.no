@@ -5,26 +5,22 @@
     <link rel="stylesheet" type="text/css" href="../css/minesweeper.css">
     <script src="../js/minesweeper.js"></script>
 </head>
-<body>
+<body onload="pageInit()">
 <div class="headDiv">
-<p class="text"> To play choose width, height and number of mine you wish to have, good luck!</p>
-<input id="X" class="input"
-       autocomplete="off"
-       placeholder="width"
-       type="number"
-/>
-<input id="Y" class="input"
-       autocomplete="off"
-       placeholder="height"
-       type="number"
-/>
-<input id="mine" class="input"
-       autocomplete="off"
-       placeholder="mines"
-       type="number"
-/>
+    <p class="text"> To play choose width, height and number of mine you wish to have, good luck!</p>
+    <select name="width:" id="widthSelect" title="Width">
 
-<button onclick="init()" id="button" class="button"> Start </button>
+    </select>
+        
+    <select name="height:" id="heightSelect" title="Height">
+
+    </select>
+
+    <select name="mine:" id="mineSelect" disabled title="Please select width and height first">
+
+    </select>
+
+<button onclick="gameInit()" id="button" class="button"> Start </button>
 </div>
 <br/><br/>
 

@@ -10,11 +10,16 @@ var clicked = 0;
 var cells;
 var html;
 var play;
+var firstClick = true; 
+
+function pageInit(){
+    var pageWidth = win 
+}
 
 /**
- * init
+ * gameInit
  */
-function init() {
+function gameInit() {
     html = "";
     play = true;
     clicked = 0;
@@ -43,8 +48,7 @@ function init() {
 
     genHtmlAndCells();
     document.getElementById("table").innerHTML = html;
-    randomize(mine);
-    organize();
+    firstClick = true;
 }
 
 /**
@@ -111,22 +115,26 @@ function pos(i,j) {
 
 /**
  * puts mines in random places
- * @param {Number} i number mines to put in the map
+ * i ,j pos can't be mine
+ * @param {Number} mineToPlace number mines to put in the map
+ * @param {Number} i
+ * @param {Number} j
  */
-function randomize(mine) {
-    if(i==0) return;
-    var Y = random(y);
-    var X = random(x);
-    if(cells[Y][X].num !=9){
-        cells[Y][X].num = 9;
-        randomize(i-1);
-    }else randomize(i);
+function randomize(mineToPlace, i , j){
+    while(0 < mineToPlace){
+        var Y = random(y);
+        var X = random(x);
+        if(cells[Y][X].num != 9 && !(X == j && Y == i)){
+            cells[Y][X].num = 9;
+            mineToPlace--;
+        }
+    }
 }
 
 /**
  * random int between 0 and i
  * @param {Number} i
- * @returns {Number}
+ * @returns {Number} Random Integer
  */
 function random(i) {
     return Math.floor((Math.random()*i));
@@ -138,6 +146,12 @@ function random(i) {
  * @param {Number} j
  */
 function cellClick(i , j) {
+    if(firstClick){
+        randomize(mine, i, j);
+        organize();
+        firstClick = false;
+    }
+
     if(cells[i][j].touchable == 1 || play == false) return;
     cells[i][j].touchable++;
     if(cells[i][j].num == 9) gameOver('You lost :(');
