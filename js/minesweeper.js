@@ -3,9 +3,9 @@
  */
 
 
-var x;
-var y;
-var mine;
+var x = 0;
+var y = 0;
+var mine = 0;
 var clicked = 0;
 var cells;
 var html;
@@ -45,13 +45,6 @@ function init() {
     document.getElementById("table").innerHTML = html;
     randomize(mine);
     organize();
-    /**
-    for (var i = 0; i < y; i++) {
-        for (var j = 0; j < x; j++){
-            cellClick(i , j);
-        }
-    }*/
-
 }
 
 /**
@@ -105,8 +98,9 @@ function fixAround(i, j) {
 
 /**
  * 1 -> 001
- * @param i
- * @returns {string}
+ * @param {Number} i
+ * @param {Number} j
+ * @returns {String}
  */
 function pos(i,j) {
     var stri = "" + i;
@@ -117,9 +111,9 @@ function pos(i,j) {
 
 /**
  * puts mines in random places
- * @param i number mines to put in the map
+ * @param {Number} i number mines to put in the map
  */
-function randomize(i) {
+function randomize(mine) {
     if(i==0) return;
     var Y = random(y);
     var X = random(x);
@@ -131,8 +125,8 @@ function randomize(i) {
 
 /**
  * random int between 0 and i
- * @param i
- * @returns {number}
+ * @param {Number} i
+ * @returns {Number}
  */
 function random(i) {
     return Math.floor((Math.random()*i));
@@ -140,8 +134,8 @@ function random(i) {
 
 /**
  * call on click
- * @param i
- * @param j
+ * @param {Number} i
+ * @param {Number} j
  */
 function cellClick(i , j) {
     if(cells[i][j].touchable == 1 || play == false) return;
@@ -157,8 +151,8 @@ function cellClick(i , j) {
 
 /**
  * in case of 0, open all around
- * @param i
- * @param j
+ * @param {Number} i
+ * @param {Number} j
  */
 function openMore(i,j) {
     if((i-1) >= 0) cellClick(i-1,j);
@@ -175,6 +169,10 @@ function openMore(i,j) {
     }
 }
 
+/**
+ * called in the end of the game!
+ * @param {String} msg 
+ */
 function gameOver(msg) {
     document.getElementById("endmsg").innerHTML = msg;
     document.getElementById("endmsgDiv").style.display='inherit';
