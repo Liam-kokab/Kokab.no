@@ -8,7 +8,7 @@
     <script src="../js/main.js"></script>
 
 </head>
-<body id="body" onload="loadImages()">
+<body id="body" onload="init()">
     
         
     <div class="backgroundDiv" id="backgroundDiv">
@@ -19,12 +19,12 @@
             
     </div>
 
-    <div style="margin: 0; padding: 0; width: 100%; text-align: center">
+    <div style="margin: 0; padding: 0; width: 100%; text-align: center" onload="FixLinks()">
         <div class="mainGridDiv">
-            <a><img class="mainGridElem" src="../img/mainImages/Home.png" id="mainGridElem1" onmouseover="controller(1 , 'over')" onmouseleave="controller(1 , 'leave')"></a>
-            <a href="./CV.html"><img class="mainGridElem" src="../img/mainImages/CV.png" id="mainGridElem2" onmouseover="controller(2 , 'over')" onmouseleave="controller(2 , 'leave')"></a>
-            <a href="./MineSweeper.html"><img class="mainGridElem" src="../img/mainImages/minesweeper.png" id="mainGridElem3" onmouseover="controller(3 , 'over')" onmouseleave="controller(3 , 'leave')"></a>
-            <a href="./SpaceFighter.html"><img class="mainGridElem" src="../img/mainImages/SpaceFighter.png" id="mainGridElem4" onmouseover="controller(4 , 'over')" onmouseleave="controller(4 , 'leave')"></a>
+            <a onclick="FixLinks()"><img class="mainGridElem" src="../img/mainImages/Home.png" id="mainGridElem1" onmouseover="controller(1 , 'over')" onmouseleave="controller(1 , 'leave')"></a>
+            <a class="links" href="../index.html?page=CV" target="_parent"><img class="mainGridElem" src="../img/mainImages/CV.png" id="mainGridElem2" onmouseover="controller(2 , 'over')" onmouseleave="controller(2 , 'leave')"></a>
+            <a class="links" href="../index.html?page=MineSweeper" target="_parent"><img class="mainGridElem" src="../img/mainImages/minesweeper.png" id="mainGridElem3" onmouseover="controller(3 , 'over')" onmouseleave="controller(3 , 'leave')"></a>
+            <a class="links" href="../index.html?page=SpaceFighter" target="_parent"><img class="mainGridElem" src="../img/mainImages/SpaceFighter.png" id="mainGridElem4" onmouseover="controller(4 , 'over')" onmouseleave="controller(4 , 'leave')"></a>
             <a href="http://soliasboligstyling.no/" target="_blank"><img class="mainGridElem" src="../img/mainImages/Solias.png" id="mainGridElem5" onmouseover="controller(5 , 'over')" onmouseleave="controller(5 , 'leave')"></a>
             <a href="https://github.com/Liam-kokab" target="_blank"><img class="mainGridElem" src="../img/mainImages/github.png" id="mainGridElem6" onmouseover="controller(6 , 'over')" onmouseleave="controller(6 , 'leave')"></a>
             <h2 id="ToolTip" class="ToolTip"></h2>  

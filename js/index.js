@@ -80,9 +80,15 @@ function updateUrl(paramName, paramValue){
   */
 function frameChange(pageName) {
     var ifr = document.getElementById("mainFrame");
-    if(pageName === "CV" && getURLParam("lang") === "no")
-        ifr.contentWindow.location.replace('./pages/' + pageName + '-no.html');
-    else ifr.contentWindow.location.replace('./pages/' + pageName + '.html');
+    var newUrl = './pages/' + pageName;
+
+    if(getURLParam('lang') === 'no'){
+        if(pageName === "CV") newUrl += '-no.html';
+        else newUrl += '.html';
+        newUrl += '?lang=no';
+    }else newUrl += '.html';
+
+    ifr.contentWindow.location.replace(newUrl);
     
     //hide menu if need be 
     hideMenu();

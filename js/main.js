@@ -25,6 +25,14 @@ var toolTips = [
     "My GitHub Page!"
 ];
 
+var initDone = false;
+function init(){
+    if(initDone) return;
+    initDone = true;
+    FixLinks();
+    loadImages();
+}
+
 
 /**
  * @param {int} num image num that call this
@@ -78,7 +86,7 @@ function mouseOver(num){
     
     //adjusting opacity of icons
     for (var j = 1; j < 7; j++) {
-        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.7;
+        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.65;
          else  document.getElementById("mainGridElem" + j).style.opacity = 1;
     }
 
@@ -203,7 +211,7 @@ function mouseLeaves(countUp, num){
         document.getElementById("body").style.backgroundColor = 'rgb(' + [color,color,color].join(',') + ')';
         document.getElementById("backgroundDiv").style.opacity = (1-countUp);
 
-        if(countUp < 1) mouseLeaves(countUp + 0.05, num);
+        if(countUp < 0.65) mouseLeaves(countUp + 0.05, num);
         else {
             document.getElementById("body").style.backgroundColor = "white";
             document.getElementById("backgroundDiv").innerHTML = "";
@@ -272,5 +280,19 @@ function getImageInfo (num){
         case 4: return new image(num, ["sf1.png", "sf2.png", "sf3.png"]);
         case 5: return new image(num, ["Solias1.png", "Solias2.png"]);
         case 6: return new image(num, ["GitHub.png"]);
+    }
+}
+
+/**
+ * reads url and fixes links
+ */
+function FixLinks(){
+    var linksElements = document.getElementsByClassName("links");  
+    if(new URL(window.location.href).searchParams.get("lang") === "no"){
+        for (var i = 0; i < linksElements.length; i++){
+            console.log(i + ": " + linksElements[i].href);
+            linksElements[i].href += "&lang=no";
+            
+        }
     }
 }
