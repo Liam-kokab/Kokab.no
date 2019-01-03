@@ -19,71 +19,96 @@
         }
         .fullScreenButton{
             position: fixed;
-            top: 2%;
-            left: 2%;
+            top: 1.5%;
+            right: 1%;
             z-index: 200;
-            width: 4%;
+            width: 3.8%;
             padding: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
+            /*background-color: rgba(0, 0, 0, 0.5);*/
         }
         .fullScreenButton:hover{
             cursor: pointer;
-            width: 4.2%;
-            top: 1.9%;
-            left: 1.9%;
+            width: 4%;
+            top: 1.4%;
+            right: 0.9%;
         }
         .mainDiv{
             height: 100vh;
             width: 100vw;
             padding: 0;
             margin: 0;
+            text-align: center;
+        }
+        pre{
+            background-color:rgb(190, 190, 190);
+            font-size: 3.2vw;
+            margin: -10px 0.45vw 0.45vw 0.45vw;
+            padding: 10px;
+            color: blue;
         }
     </style>
     <script>
-        
+        /*
         function openFullscreen() {
             var elem = document.getElementById("mainDiv"); 
             if (elem.requestFullscreen) {
             elem.requestFullscreen();
-            } else if (elem.mozRequestFullScreen) { /* Firefox */
+            } else if (elem.mozRequestFullScreen) { // Firefox 
             elem.mozRequestFullScreen();
-            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera 
             elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+            } else if (elem.msRequestFullscreen) { // IE/Edge 
             elem.msRequestFullscreen();
             }
-            changeButton();
         }
 
         function closeFullscreen() {
             var elem = document.getElementById("mainDiv"); 
             if (document.exitFullscreen) {
                 document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) { /* Firefox */
+            } else if (document.mozCancelFullScreen) { // Firefox 
                 document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+            } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera 
                 document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { /* IE/Edge */
+            } else if (document.msExitFullscreen) { // IE/Edge 
                 document.msExitFullscreen();
             }
-            changeButton();
+        }
+        var fullScreen = false;
+        function changeButton(){
+            console.log("event");
+            if ((!window.screenTop && !window.screenY) && fullScreen) {
+                //Not fullScreen
+                document.getElementById("fullScreen").style.display = "inherit";
+                document.getElementById("closeFullScreen").style.display = "none";
+                fullScreen = false;
+            } else if((window.screenTop && window.screenY) && !fullScreen){
+                //fullScreen
+                document.getElementById("fullScreen").style.display = "none";
+                document.getElementById("closeFullScreen").style.display = "inherit";
+                fullScreen = true;
+            }
+            document.getElementById("fighter").focus();
         }
 
-        function changeButton(){
-            var button = document.getElementsByClassName("fullScreenButton");
-            for (var i = 0; i < button; i++) {
-                if(button[i].style.display == "none") button[i].style.display = "inherit";
-                else button[i].style.display = "none";
-            }
-        }
+        document.addEventListener('webkitfullscreenchange', changeButton, false);
+        document.addEventListener('mozfullscreenchange', changeButton, false);
+        document.addEventListener('fullscreenchange', changeButton, false);
+        */
     </script>
     
 </head>
 <body>
     <div class="mainDiv" id="mainDiv">
-        <img src="../icon/fullscreen.svg" onclick="openFullscreen()" class="fullScreenButton"/> 
-        <img src="../icon/closeFullscreen.svg" onclick="closeFullscreen()" class="fullScreenButton" style="display: none;"/> 
-        <iframe class="fighter" id="fighter" src="https://playcanv.as/p/ZJsO4gqs/"/>
+        <!-- Not ready Coming soon :)
+        <img id="fullScreen" src="../icon/fullscreen.svg" onclick="openFullscreen()" class="fullScreenButton"/> 
+        <img id="closeFullScreen" src="../icon/closeFullscreen.svg" onclick="closeFullscreen()" class="fullScreenButton" style="display: none;"/> 
+        -->
+        <iframe class="fighter" id="fighter" src="https://playcanv.as/p/ZJsO4gqs/"></iframe>
+        
+        <pre>
+Move: ArrowKeys          Pause/Unpause: P
+Shot: Crtl               Missile: Space  </pre>
     </div>
 
 </body>

@@ -1,5 +1,6 @@
 /**
  * Created by Liam.k on 08.11-2018.
+ * TODO: update and redo this
  */
 
 //animation sync controllers 
@@ -17,12 +18,12 @@ var backgroundImageIds = [];
 
 //page tool tips
 var toolTips = [
-    "We are already her! Click for nothing to happen",
-    "CV, not much more to say... Have fun reading",
-    "MineSweeper, becurse I was bored an evening",
-    "SpaceFighter, a game build on PlayCanvas engine",
-    "Solias Boligstyling, website I made :)",
-    "My GitHub Page!"
+    "We are already here! Click for nothing to happen.",
+    "CV, not much more to say... Have fun reading.",
+    "MineSweeper, because I was bored an evening.",
+    "SpaceFighter, a game build on PlayCanvas engine.",
+    "Solias Boligstyling, a website I made.",
+    "My GitHub Page."
 ];
 
 var initDone = false;
@@ -70,7 +71,7 @@ function controller(num, action){
 
         //performers mouse leave actions
         document.getElementById("mainGridElem" + num).style.opacity = 1;
-        mouseLeaves(0.34, num);     
+        mouseLeaves(0.35, num);     
     }
 }
 
@@ -86,13 +87,13 @@ function mouseOver(num){
     
     //adjusting opacity of icons
     for (var j = 1; j < 7; j++) {
-        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.5;
+        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.45;
          else  document.getElementById("mainGridElem" + j).style.opacity = 1;
     }
 
     var imageCount = -1;
     var innerHeight = document.getElementById('body').clientHeight;
-    document.getElementById('body').style.backgroundColor = 'rgb(256,256,256)';
+    //document.getElementById('body').style.backgroundColor = 'rgb(256,256,256)';
 
     //getting info for image 
     var images = getImageInfo(num);
@@ -205,13 +206,15 @@ function mouseLeaves(countUp, num){
             return;
         }
         for (var j = 1; j < 7; j++){
-            if(num != j) document.getElementById("mainGridElem" + j).style.opacity = countUp;
+            //if(num != j) 
+            document.getElementById("mainGridElem" + j).style.opacity = countUp;
         }
-        var color = countUp * 350;
-        document.getElementById("body").style.backgroundColor = 'rgb(' + [color,color,color].join(',') + ')';
-        document.getElementById("backgroundDiv").style.opacity = (1-countUp);
+        var color = 200 + countUp*10;
+        if(color > 256) color = 256;
+        //document.getElementById("body").style.backgroundColor = 'rgb(' + [color,color,color].join(',') + ')';
+        document.getElementById("backgroundDiv").style.opacity = (1-((countUp-0.32)*3));
 
-        if(countUp < 0.65) mouseLeaves(countUp + 0.05, num);
+        if(countUp < 0.65) mouseLeaves(countUp + 0.03, num);
         else {
             document.getElementById("body").style.backgroundColor = "white";
             document.getElementById("backgroundDiv").innerHTML = "";
@@ -290,8 +293,7 @@ function FixLinks(){
     var linksElements = document.getElementsByClassName("links");  
     if(new URL(window.location.href).searchParams.get("lang") === "no"){
         for (var i = 0; i < linksElements.length; i++){
-            linksElements[i].href += "&lang=no";
-            
+            linksElements[i].href += "&lang=no";          
         }
     }
 }
