@@ -38,7 +38,6 @@ function pageInit(){
 }
 
 function updateMineSelect(){
-    console.log("hello");
     try{
         x = parseInt(document.getElementById("widthSelect").value);
         y = parseInt(document.getElementById("heightSelect").value);

@@ -20,7 +20,7 @@ var toolTips = [
     "We are already her! Click for nothing to happen",
     "CV, not much more to say... Have fun reading",
     "MineSweeper, becurse I was bored an evening",
-    "SpaceFighter, a game based on PlayCanvas engine",
+    "SpaceFighter, a game build on PlayCanvas engine",
     "Solias Boligstyling, website I made :)",
     "My GitHub Page!"
 ];
@@ -86,13 +86,13 @@ function mouseOver(num){
     
     //adjusting opacity of icons
     for (var j = 1; j < 7; j++) {
-        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.65;
+        if(num != j) document.getElementById("mainGridElem" + j).style.opacity = 0.5;
          else  document.getElementById("mainGridElem" + j).style.opacity = 1;
     }
 
     var imageCount = -1;
     var innerHeight = document.getElementById('body').clientHeight;
-    document.getElementById('body').style.backgroundColor = 'rgb(100,100,100)';
+    document.getElementById('body').style.backgroundColor = 'rgb(256,256,256)';
 
     //getting info for image 
     var images = getImageInfo(num);
@@ -169,7 +169,7 @@ function backBackgroundAnimation(iteration, image, opacityChange){
         }catch(error) { imageOpacity = 0.5; }
         
         if(imageOpacity < 0.05 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
-        else if(imageOpacity > 0.5 && opacityChange > 0) opacityChange = 0 - opacityChange;
+        else if(imageOpacity > 0.4 && opacityChange > 0) opacityChange = 0 - opacityChange;
         
         //try for safety
         try{ 
@@ -290,7 +290,6 @@ function FixLinks(){
     var linksElements = document.getElementsByClassName("links");  
     if(new URL(window.location.href).searchParams.get("lang") === "no"){
         for (var i = 0; i < linksElements.length; i++){
-            console.log(i + ": " + linksElements[i].href);
             linksElements[i].href += "&lang=no";
             
         }
