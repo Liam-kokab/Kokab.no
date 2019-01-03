@@ -13,7 +13,46 @@ var play;
 var firstClick = true; 
 
 function pageInit(){
-    var pageWidth = win 
+    var maxCellWidth = Math.floor((document.getElementById('body').clientWidth ) / 38);
+    var maxCellHeight = Math.floor((document.getElementById('body').clientHeight - 88) / 38);
+
+    var widthSelector = document.getElementById('widthSelect');
+    var heightSelector = document.getElementById('heightSelect');
+
+    var html = "";
+    for (var i = 5; i < maxCellWidth; i++) {
+        html += '<option value="' + i + '"';
+        if(i === maxCellWidth-1) html += 'selected="selected"';
+        html += '>' + i + '</option>';
+    }
+    document.getElementById('widthSelect').innerHTML = html;
+
+    html = "";
+    for (i = 5; i < maxCellHeight; i++) {
+        html += '<option value="' + i + '" '; 
+        if(i === maxCellHeight-1) html += 'selected="selected"';
+        html += '>' + i + '</option>';
+    }
+    document.getElementById('heightSelect').innerHTML = html;
+    updateMineSelect();
+}
+
+function updateMineSelect(){
+    console.log("hello");
+    try{
+        x = parseInt(document.getElementById("widthSelect").value);
+        y = parseInt(document.getElementById("heightSelect").value);
+    }catch(e){ return; }
+    if(isNaN(x) || isNaN(y)) return;
+
+    var html = "";
+
+    for (var i = 5; i < (x*y/2); i++) {
+        html += '<option value="' + i + '">' + i + '</option>';
+    }
+    document.getElementById('mineSelect').innerHTML = html;
+
+    
 }
 
 /**
@@ -23,27 +62,17 @@ function gameInit() {
     html = "";
     play = true;
     clicked = 0;
-    document.getElementById("endmsgDiv").style.display='none';
-    x = parseInt(document.getElementById("X").value);
-    y = parseInt(document.getElementById("Y").value);
-    mine = parseInt(document.getElementById("mine").value);
-    var problem = false;
+    
+    //get value from selectors
+    x = parseInt(document.getElementById("widthSelect").value);
+    y = parseInt(document.getElementById("heightSelect").value);
+    mine = parseInt(document.getElementById("mineSelect").value);
 
-    if(x < 5 || x > 25 || y < 5 || y > 25 || isNaN(x) || isNaN(y)) {
-        document.getElementById("p1").style.display = 'inherit';
-        problem = true;
-    }else document.getElementById("p1").style.display = 'none';
-    if(mine < 5 || mine > Math.max((x*y)/2, 12) || isNaN(mine)){
-        document.getElementById("p2").style.display = 'inherit';
-        problem = true;
-    }else document.getElementById("p2").style.display = 'none';
-    if(problem){
-        document.getElementById("table").innerHTML = html;
-        return;
-    }
+    var endGameMsg = document.getElementById("endmsgDiv");
+    endGameMsg.style.display='none';
+    endGameMsg.style.width = (x * 37 + 10) + 'px';
+    endGameMsg.style.top = (y*37/2 + 30) + 'px';
 
-    document.getElementById("endmsgDiv").style.width = (x * 37) + 'px';
-    document.getElementById("endmsgDiv").style.top = (x*37/2 - 95) + 'px';
     document.getElementById("button").innerHTML = "Reset";
 
     genHtmlAndCells();

@@ -5,32 +5,21 @@
     <link rel="stylesheet" type="text/css" href="../css/minesweeper.css">
     <script src="../js/minesweeper.js"></script>
 </head>
-<body onload="pageInit()">
+<body onload="pageInit()" id="body">
 <div class="headDiv">
     <p class="text"> To play choose width, height and number of mine you wish to have, good luck!</p>
-    <select name="width:" id="widthSelect" title="Width">
-
-    </select>
-        
-    <select name="height:" id="heightSelect" title="Height">
-
-    </select>
-
-    <select name="mine:" id="mineSelect" disabled title="Please select width and height first">
-
-    </select>
+    <select name="width:" id="widthSelect" title="Width" class="input" onchange="updateMineSelect()"></select>
+    <select name="height:" id="heightSelect" title="Height" class="input" onchange="updateMineSelect()"></select>
+    <select name="mine:" id="mineSelect" title="Number of mines" class="input"></select>
 
 <button onclick="gameInit()" id="button" class="button"> Start </button>
 </div>
-<br/><br/>
 
 <div class="mainDiv">
-    <p class="warning" id="p1"> X and Y should be between 5 and 25, </p>
-    <p class="warning" id="p2"> number of mines should be between 5 and (x*y)/2 </p>
     <div class="endmsgDiv" id="endmsgDiv">
         <p class="endmsg" id="endmsg"></p>
     </div >
-    <table id="table">
+    <table id="table" class="table">
     </table>
 </div>
 </body>
