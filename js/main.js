@@ -57,7 +57,7 @@ function controller(num, action){
         MouseOverInProgress = false;
     
     }else if(action === "leave"){
-        if(MouseOverInProgress) return;
+        if(MouseOverInProgress || leaveAnimationInProgress) return;
 
         stopBackgroundAnimation = true;
         if(imageAnimationPlayingNow > 0){
