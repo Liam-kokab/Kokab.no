@@ -107,7 +107,7 @@ function mouseOver(num){
     backgroundImageIds = [];
     
     do{
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 4; i++) {
             var id = "backgroundImg" + (++imageCount);
             divElem.innerHTML += "<img src='" + 
                 images.folder + images.names[random(0,images.names.length)] + 
@@ -115,12 +115,12 @@ function mouseOver(num){
 
             backgroundImageIds.push(id);
             //top position
-            document.getElementById(id).style.top = ((Math.floor(imageCount/3) * imageHeight)) + "px";
+            document.getElementById(id).style.top = ((Math.floor(imageCount/4) * imageHeight)) + "px";
 
             //left position
             document.getElementById(id).style.left = ((i * document.getElementById(id).clientWidth)) + "px";
         }
-    }while(innerHeight > ((imageCount/3) * imageHeight) - 10);
+    }while(innerHeight > ((imageCount/4) * imageHeight) - 10);
     
     //starting background animation
     stopBackgroundAnimation = false;
@@ -279,8 +279,8 @@ function getImageInfo (num){
     switch(num){ 
         case 1: return new image(num, ["Home.png","CV.png","minesweeper.png", "SpaceFighter.png"]);
         case 2: return new image(num, ["CV1.png","CV2.png","CV2.png"]);
-        case 3: return new image(num, ["minesweeper1.png", "minesweeper2.png"]);
-        case 4: return new image(num, ["sf1.png", "sf2.png", "sf3.png"]);
+        case 3: return new image(num, ["minesweeper.png" ,"minesweeper1.png", "minesweeper2.png"]);
+        case 4: return new image(num, ["SpaceFighter1.png", "SpaceFighter2.png", "SpaceFighter3.png", "SpaceFighter4.png"]);
         case 5: return new image(num, ["Solias1.png", "Solias2.png"]);
         case 6: return new image(num, ["GitHub.png","github1.png","git.png"]);
     }

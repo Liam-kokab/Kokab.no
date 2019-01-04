@@ -12,6 +12,9 @@ var html;
 var play;
 var firstClick = true; 
 
+/**
+ * initializes the page
+ */
 function pageInit(){
     var maxCellWidth = Math.floor((document.getElementById('body').clientWidth ) / 38);
     var maxCellHeight = Math.floor((document.getElementById('body').clientHeight - 88) / 38);
@@ -37,6 +40,9 @@ function pageInit(){
     updateMineSelect();
 }
 
+/**
+ * updates the select for mine number
+ */
 function updateMineSelect(){
     try{
         x = parseInt(document.getElementById("widthSelect").value);
@@ -45,17 +51,17 @@ function updateMineSelect(){
     if(isNaN(x) || isNaN(y)) return;
 
     var html = "";
-
+    var selectNum = Math.floor((x*y/4));
     for (var i = 5; i < (x*y/2); i++) {
-        html += '<option value="' + i + '">' + i + '</option>';
+        html += '<option value="' + i + '" ';
+        if(i === selectNum) html += 'selected="selected"';
+        html += '>' + i + '</option>';
     }
-    document.getElementById('mineSelect').innerHTML = html;
-
-    
+    document.getElementById('mineSelect').innerHTML = html;    
 }
 
 /**
- * gameInit
+ * initializes and starts the game
  */
 function gameInit() {
     html = "";
@@ -179,14 +185,12 @@ function cellClick(i , j) {
         organize();
         firstClick = false;
     }
-
+    var e = document.getElementById(pos(i, j));
     if(cells[i][j].touchable == 1 || play == false) return;
     cells[i][j].touchable++;
     if(cells[i][j].num == 9) gameOver('You lost :(');
-    clicked++;
-    if(clicked >= (x*y)-mine ) gameOver('You won :)');
+    else if(++clicked >= (x*y)-mine ) gameOver('You won :)');
     if(cells[i][j].num == 0) openMore(i, j);
-    var e = document.getElementById(pos(i, j));
     e.className="cellsT";
     e.src="../img/minesweeper/" + cells[i][j].num + ".png";
 }
