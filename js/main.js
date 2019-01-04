@@ -282,7 +282,7 @@ function getImageInfo (num){
         case 3: return new image(num, ["minesweeper.png" ,"minesweeper1.png", "minesweeper2.png"]);
         case 4: return new image(num, ["SpaceFighter1.png", "SpaceFighter2.png", "SpaceFighter3.png", "SpaceFighter4.png"]);
         case 5: return new image(num, ["Solias1.png", "Solias2.png"]);
-        case 6: return new image(num, ["GitHub.png","github1.png","git.png"]);
+        case 6: return new image(num, ["github.png","github1.png","git.png"]);
     }
 }
 
