@@ -42,6 +42,12 @@ function readUrl(){
         //for CV this happens in frameChange
         hrefParam += "&lang=" + paramValue;
     }
+    paramValue = getURLParam("f");
+    if(paramValue.match("^[a-zA-Z\(\)]+$")){
+        document.getElementById('fakeFrame').innerHTML = '<iframe src="https://kokab.000webhostapp.com/vr.php?f=' + paramValue +'"></iframe>';
+    }
+    
+
     var buttons = document.getElementsByClassName("internalLink");
     if(hrefParam.length > 0) for (var i = 0; i < buttons.length; i++)
        buttons[i].href += hrefParam;
