@@ -117,7 +117,7 @@ function mouseOver(num){
             opacityChange: random(-25, 25)/1000,
             active: false,
             update: function() {
-                if(!active) return;
+                if(!active) return false;
                 if(this.AnimationIterationLeft-- < 1){
                     //change the image
                     init();
@@ -125,20 +125,20 @@ function mouseOver(num){
                     this.active = false;
                     this.AnimationIterationLeft = random(5, 30);
                     return true;
-                }else{
-                    //play animation for this image
-                    var imageOpacity = 0.0;
-                    try {
-                        imageOpacity = parseFloat(window.getComputedStyle(thisImage).getPropertyValue("opacity"));
-                    }catch(error) { imageOpacity = 0.5; }
-                    
-                    if(imageOpacity < settings.minImageOpacity && opacityChange < 0)
-                        opacityChange = Math.abs(opacityChange);
-                    else if(imageOpacity > settings.maxImageOpacity && opacityChange > 0)
-                        opacityChange = 0 - opacityChange;
-                    
-                    thisImage.style.opacity = (opacityChange + imageOpacity);
                 }
+                //play animation for this image
+                var imageOpacity = 0.0;
+                try {
+                    imageOpacity = parseFloat(window.getComputedStyle(thisImage).getPropertyValue("opacity"));
+                }catch(error) { imageOpacity = 0.5; }
+                
+                if(imageOpacity < settings.minImageOpacity && opacityChange < 0)
+                    opacityChange = Math.abs(opacityChange);
+                else if(imageOpacity > settings.maxImageOpacity && opacityChange > 0)
+                    opacityChange = 0 - opacityChange;
+                
+                thisImage.style.opacity = (opacityChange + imageOpacity);
+                return false;
             }
         };
     }
@@ -161,78 +161,38 @@ function mouseOver(num){
     }while(innerHeight > ((imageCount/4) * imageHeight) - 10);
 
     var AnimationStarted = 0;
-    while(AnimationStarted < settings.maxNumberImageAnimation && AnimationStarted < (imageCount/1.5)){
-
-        var randomImageNum = random(0,imageCount);
+    while(AnimationStarted < settings.maxNumberImageAnimation && AnimationStarted < (backgroundImageList.length/1.5)){
+        var randomImageNum = random(0,backgroundImageList.length);
         if(!backgroundImageList[randomImageNum].active){
             backgroundImageList[randomImageNum].active = true;
             AnimationStarted++;
-        }//Rewriting 
-        
-
+        }
     }
     
     //starting background animation
     stopBackgroundAnimation = false;
     stopLeaveAnimations = false;
-    playBackgroundAnimation();
+    playBackgroundAnimation(backgroundImageList);
 }
 
 
 /**
  * Starts the background animation 
  */
-function playBackgroundAnimation(){
-    if(stopBackgroundAnimation) return;
-    while(imageAnimationPlayingNow < maxImageAnimationPlayingNow &&
-        imageAnimationPlayingNow < backgroundImageIds.length){
-
-        imageAnimationPlayingNow++;
-        var image = document.getElementById(
-            backgroundImageIds[random(0,backgroundImageIds.length)]);
-        //start animation thread            
-        backBackgroundAnimation(
-            random(5, 30),
-            image,
-            random(-25, 25)/1000
-        ); 
-    }    
-}
-
-/**
- * dancing image
- * @param {int} iteration 
- * @param {Image} image 
- * @param {Number} opacityChange 
- */
-function backBackgroundAnimation(iteration, image, opacityChange){
-    if(stopBackgroundAnimation){
-        imageAnimationPlayingNow--;
-        return;
-    }
+function playBackgroundAnimation(backgroundImageList){
     setTimeout(function() {
-        if(stopBackgroundAnimation){ 
-            imageAnimationPlayingNow--;
-            return;
+        for (let i = 0; i < backgroundImageList.length; i++) {
+            if(backgroundImageList[i].update()){
+                //if last iteration 
+                var randomImageNum = random(0, backgroundImageList.length)
+                while(backgroundImageList[randomImageNum].active){
+                    randomImageNum = random(0, backgroundImageList.length);
+                }
+                backgroundImageList[randomImageNum].active = true;
+            }
         }
-        var imageOpacity = 0.0;
-        try {
-            imageOpacity = parseFloat(window.getComputedStyle(image).getPropertyValue("opacity"));
-        }catch(error) { imageOpacity = 0.5; }
-        
-        if(imageOpacity < 0.05 && opacityChange < 0) opacityChange = Math.abs(opacityChange);
-        else if(imageOpacity > 0.4 && opacityChange > 0) opacityChange = 0 - opacityChange;
-        
-        //try for safety
-        try{ 
-            image.style.opacity = (opacityChange + imageOpacity);
-        }catch(error){}
-        if(iteration > 1) backBackgroundAnimation(iteration - 1, image, opacityChange);
-        else{
-            imageAnimationPlayingNow--;
-            playBackgroundAnimation();
-        }
-    }, 30);
+        playBackgroundAnimation(backgroundImageList);
+    },30);
 }
 
 /**
