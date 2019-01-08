@@ -83,6 +83,7 @@ function controller(num, action){
  * @param {int} num image number that call this.
  */
 function mouseOver(num){
+    MouseOverInProgress = true;
     //show tool tip
     var ToolTipText = document.getElementById("ToolTip");
     ToolTipText.style.opacity = 1;
@@ -180,8 +181,16 @@ function mouseOver(num){
  * Starts the background animation 
  */
 function playBackgroundAnimation(backgroundImageList){
+    if(stopBackgroundAnimation) {
+        MouseOverInProgress = false;
+        return;
+    }
     setTimeout(function() {
-        for (let i = 0; i < backgroundImageList.length; i++) {
+        if(stopBackgroundAnimation) {
+            MouseOverInProgress = false;
+            return;
+        }
+        for (var i = 0; i < backgroundImageList.length; i++) {
             if(backgroundImageList[i].update()){
                 //if last iteration 
                 var randomImageNum = random(0, backgroundImageList.length)
