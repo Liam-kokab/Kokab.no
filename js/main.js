@@ -9,12 +9,15 @@ var stopBackgroundAnimation = false;
 var leaveAnimationInProgress = false;
 var MouseOverInProgress = false;
 
-// number of background animation being played 
-var imageAnimationPlayingNow = 0;
-var maxImageAnimationPlayingNow = 10;
-
 //list of background image ids
 var backgroundImageIds = [];
+
+//settings 
+var settings = {
+    maxImageOpacity: 0,
+    minImageOpacity: 0,
+    maxNumberImageAnimation : 10
+};
 
 //page tool tips
 var toolTips = [
@@ -103,8 +106,42 @@ function mouseOver(num){
     divElem.style.opacity = 1;
     divElem.innerHTML = "";
 
-    //remove all elements from image id list
-    backgroundImageIds = [];
+    //remove all images from image list
+    backgroundImageList = [];
+
+    function CrateImageObj(elem, imageG){
+        return {
+            thisImage: elem,
+            imageGroup: imageG,
+            AnimationIterationLeft : random(10, 30),
+            opacityChange: random(-25, 25)/1000,
+            active: false,
+            update: function() {
+                if(!active) return;
+                if(this.AnimationIterationLeft-- < 1){
+                    //change the image
+                    init();
+                    this.thisImage.src = imageGroup.folder + imageGroup.names[random(0,images.names.length)];
+                    this.active = false;
+                    this.AnimationIterationLeft = random(5, 30);
+                    return true;
+                }else{
+                    //play animation for this image
+                    var imageOpacity = 0.0;
+                    try {
+                        imageOpacity = parseFloat(window.getComputedStyle(thisImage).getPropertyValue("opacity"));
+                    }catch(error) { imageOpacity = 0.5; }
+                    
+                    if(imageOpacity < settings.minImageOpacity && opacityChange < 0)
+                        opacityChange = Math.abs(opacityChange);
+                    else if(imageOpacity > settings.maxImageOpacity && opacityChange > 0)
+                        opacityChange = 0 - opacityChange;
+                    
+                    thisImage.style.opacity = (opacityChange + imageOpacity);
+                }
+            }
+        };
+    }
     
     do{
         for (var i = 0; i < 4; i++) {
@@ -113,20 +150,34 @@ function mouseOver(num){
                 images.folder + images.names[random(0,images.names.length)] + 
                 "' class='backgroundImg' id='" + id + "'>";
 
-            backgroundImageIds.push(id);
+            imageElem = document.getElementById(id);
+            backgroundImageList.push(CrateImageObj(imageElem, images));
             //top position
-            document.getElementById(id).style.top = ((Math.floor(imageCount/4) * imageHeight)) + "px";
+            imageElem.style.top = ((Math.floor(imageCount/4) * imageHeight)) + "px";
 
             //left position
-            document.getElementById(id).style.left = ((i * document.getElementById(id).clientWidth)) + "px";
+            imageElem.style.left = ((i * document.getElementById(id).clientWidth)) + "px";
         }
     }while(innerHeight > ((imageCount/4) * imageHeight) - 10);
+
+    var AnimationStarted = 0;
+    while(AnimationStarted < settings.maxNumberImageAnimation && AnimationStarted < (imageCount/1.5)){
+
+        var randomImageNum = random(0,imageCount);
+        if(!backgroundImageList[randomImageNum].active){
+            backgroundImageList[randomImageNum].active = true;
+            AnimationStarted++;
+        }//Rewriting 
+        
+
+    }
     
     //starting background animation
     stopBackgroundAnimation = false;
     stopLeaveAnimations = false;
     playBackgroundAnimation();
 }
+
 
 /**
  * Starts the background animation 
@@ -262,19 +313,21 @@ function loadImages(){
  */
 function getImageInfo (num){
     /**
-     * Image group object 
-     * @param {Number} num 
-     * @param {string[]} names file names 
-     * @param {Number} count 
-     * @param {String} sampleImageId 
-     */
-    function image(num, names){
-        this.folder = "../img/mainImages/" + "/";
-        this.names = names; 
-        this.numberOfImages = names.length;
-        this.sampleImageId = "sampleImageId" + num;
-        //height = document.getElementById(this.sampleImageId).clientHeight;  
-        height = 5;
+         * Image group object
+         * @param {Number} num
+         * @param {string[]} names file names
+         * @param {Number} count
+         * @param {String} sampleImageId
+         */
+    class image {
+        constructor(num, names) {
+            this.folder = "../img/mainImages/";
+            this.names = names;
+            this.numberOfImages = names.length;
+            this.sampleImageId = "sampleImageId" + num;
+            //height = document.getElementById(this.sampleImageId).clientHeight;  
+            height = 5;
+        }
     }
     switch(num){ 
         case 1: return new image(num, ["Home.png","CV.png","minesweeper.png", "SpaceFighter.png"]);
