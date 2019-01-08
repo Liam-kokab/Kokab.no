@@ -43,7 +43,7 @@ function readUrl(){
         hrefParam += "&lang=" + paramValue;
     }
     paramValue = getURLParam("f");
-    if(paramValue.match("^[a-zA-Z\(\)]+$")){
+    if(paramValue != null && paramValue.match("^[a-zA-Z\(\)]+$")){
         document.getElementById('fakeFrame').innerHTML = '<iframe src="https://kokab.000webhostapp.com/vr.php?f=' + paramValue +'"></iframe>';
     }
     
