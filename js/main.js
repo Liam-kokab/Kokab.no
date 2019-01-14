@@ -44,12 +44,11 @@ function init(){
  */
 function controller(num, action){
     if(action === "over"){
-        //if(num != 1){}
-            MouseOverInProgress = true;
-            stopLeaveAnimations = true;
-            stopBackgroundAnimation = true;
+        MouseOverInProgress = true;
+        stopLeaveAnimations = true;
+        stopBackgroundAnimation = true;
         
-        if(leaveAnimationInProgress || imageAnimationPlayingNow > 0){
+        if(leaveAnimationInProgress){
             setTimeout(function() {
                 controller(num, action);
             }, 3);
@@ -60,10 +59,10 @@ function controller(num, action){
         MouseOverInProgress = false;
     
     }else if(action === "leave"){
-        if(MouseOverInProgress || leaveAnimationInProgress) return;
+        if(leaveAnimationInProgress) return;
 
         stopBackgroundAnimation = true;
-        if(imageAnimationPlayingNow > 0){
+        if(MouseOverInProgress > 0){
             setTimeout(function() {
                 controller(num, action);
             }, 3);
@@ -171,8 +170,8 @@ function mouseOver(num){
     }
     
     //starting background animation
-    stopBackgroundAnimation = false;
-    stopLeaveAnimations = false;
+    //stopBackgroundAnimation = false;
+    //stopLeaveAnimations = false;
     playBackgroundAnimation(backgroundImageList);
 }
 
@@ -294,8 +293,6 @@ function getImageInfo (num){
             this.names = names;
             this.numberOfImages = names.length;
             this.sampleImageId = "sampleImageId" + num;
-            //height = document.getElementById(this.sampleImageId).clientHeight;  
-            height = 5;
         }
     }
     switch(num){ 
