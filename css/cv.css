@@ -32,8 +32,7 @@ body {
 }
 table{
     text-align: left;
-    margin-top: 3px;
-    margin: 0;
+    margin: 0 0 5px 0;
 }
 .firstColumn{
     text-align: left;
@@ -71,7 +70,7 @@ h2{
 }
 
 p{
-    margin: 3px 15px 0 9px;
+    margin: 3px 15px 5px 9px;
 }
 
 .mainImg{
@@ -83,6 +82,7 @@ p{
 }
 hr{
     width: auto;
+    margin: 0 20px 4px 9px;
 }
 
 
@@ -110,6 +110,14 @@ hr{
     }
     .mainDiv{
         padding-bottom: 0;
+        padding-top: 0;
         box-shadow: none;
+        
+    }
+    .mainImg{
+        top: 0; 
+    }
+    table{
+        margin-bottom: 3px;
     }
   }
