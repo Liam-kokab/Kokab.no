@@ -81,7 +81,7 @@ p{
 }
 
 .mainImg{
-    width: 100px;
+    width: 115px;
     position: absolute;
     right: 2vw;
     top: 20px;  
@@ -125,6 +125,7 @@ hr{
     .mainImg{
         top: 0;
         right: 35px;
+        width: 100px;
     }
 
     h2{
